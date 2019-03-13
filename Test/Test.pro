@@ -1,6 +1,6 @@
 TARGET=Test
 SOURCES+= main.cpp \
-../Curve/src/Curve.cpp
+../Curve/src/ControlPoint.cpp
 
 INCLUDEPATH+=/usr/local/include
 INCLUDEPATH+= ../Curve/include
