@@ -4,7 +4,7 @@
 int main()
 {
     std::cout<<"Curve main.cpp\n";
-    ControlPoint P0();
+  //  ControlPoint P0();
 
 
 }

@@ -1,8 +1,9 @@
 #include <iostream>
-#include <gtest/gtest.h>
+
 #include "ControlPoint.h"
-#include "Curve.h"
-#include "Vec3.h"
+
+#include <gtest/gtest.h>
+//#include "Curve.h"
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc,argv);
@@ -39,13 +40,14 @@ TEST(Vec3, plusEqual)
 TEST(ControlPoint, defaultCtor)
 {
     ControlPoint p;
-    auto pos=p.getPosition();
+    Vec3 pos=p.getPosition();
     EXPECT_FLOAT_EQ(pos.x,0.0f);
     EXPECT_FLOAT_EQ(pos.y,0.0f);
     EXPECT_FLOAT_EQ(pos.z,0.0f);
 }
 
-TEST(ControlPoint, setPosition)
+
+/*TEST(ControlPoint, setPosition)
 {
     ControlPoint p;
     p.setPosition({0.0f, -2.5,12.0004f});
@@ -54,7 +56,7 @@ TEST(ControlPoint, setPosition)
     EXPECT_FLOAT_EQ(pos.y,-2.5f);
     EXPECT_FLOAT_EQ(pos.z,12.0004f);
 }
-
+*/
 TEST(ControlPoint, userCtor)
 {
 
