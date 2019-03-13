@@ -1,11 +1,6 @@
-TARGET= Curve
-
-SOURCES+= src/main.cpp \
-           src/Curve.cpp \
+TARGET=Curve
+SOURCES+=src/main.cpp \
            src/ControlPoint.cpp
-
-HEADERS+=  include/Vec3.h \
-           include/ControlPoint.h \
-           include/Curve.h
-
-INCLUDEPATH += include
+HEADERS+=include/Vec3.h \
+           include/ControlPoint.h
+INCLUDEPATH+=include

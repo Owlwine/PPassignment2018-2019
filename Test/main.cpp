@@ -37,17 +37,18 @@ TEST(Vec3, plusEqual)
     EXPECT_FLOAT_EQ(a.z,4.0f);
 }
 
+
 TEST(ControlPoint, defaultCtor)
 {
     ControlPoint p;
-    Vec3 pos=p.getPosition();
+    auto pos=p.getPosition();
     EXPECT_FLOAT_EQ(pos.x,0.0f);
     EXPECT_FLOAT_EQ(pos.y,0.0f);
     EXPECT_FLOAT_EQ(pos.z,0.0f);
 }
 
 
-/*TEST(ControlPoint, setPosition)
+TEST(ControlPoint, setPosition)
 {
     ControlPoint p;
     p.setPosition({0.0f, -2.5,12.0004f});
@@ -56,8 +57,8 @@ TEST(ControlPoint, defaultCtor)
     EXPECT_FLOAT_EQ(pos.y,-2.5f);
     EXPECT_FLOAT_EQ(pos.z,12.0004f);
 }
-*/
+
 TEST(ControlPoint, userCtor)
 {
-
+    ;
 }
