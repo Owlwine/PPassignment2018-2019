@@ -9,14 +9,14 @@ public:
     Curve()=default;
     Curve(const Curve &)=delete;
     Curve & operator=(const Curve &)=delete ;
-    Curve(const std::vector<ControlPoint> &_ControlPoints, size_t _numControlPoints, size_t _numCurvePoints);
+    Curve(const std::vector<Vec3> &_ControlPoints, size_t _numControlPoints, size_t _numCurvePoints);
     size_t getControlPointsNumber() const;
     size_t getCurvePointsNumber() const;
-    void render() const;
+    void showControlPoints() const;
     //void renderGL() const;
 private:
     size_t m_numControlPoints=4;
     size_t m_numCurvePoints=1000;
-    std::vector<ControlPoint> m_ControlPoints;
+    std::vector<Vec3> m_ControlPoints;
 };
 #endif

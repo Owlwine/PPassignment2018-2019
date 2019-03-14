@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Curve.h"
 #include <random>
 
@@ -12,16 +13,25 @@ size_t Curve::getCurvePointsNumber() const
 }
 
 
-Curve::Curve(const std::vector<ControlPoint> &_ControlPoints, size_t _numControlPoints, size_t _numCurvePoints)
+Curve::Curve(const std::vector<Vec3> &_ControlPoints, size_t _numControlPoints, size_t _numCurvePoints)
 {
     m_numControlPoints=_numControlPoints;
     m_numCurvePoints=_numCurvePoints;
     std::random_device rd;  //Will be used to obtain a seed for the random number engine
     std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
 
-/*
+
+    for(size_t i=0;i <_numControlPoints; ++i)
+    m_ControlPoints.push_back(_ControlPoints[i]);
+
+
+}
+
+void Curve::showControlPoints() const
+{
     for(size_t i=0;i <m_numControlPoints; ++i)
-    m_ControlPoints[i].setPosition(_ControlPoints[i].getPosition());
-*/
+    {
+        std::cout<<m_ControlPoints[i].x<<' '<<m_ControlPoints[i].y<<' '<<m_ControlPoints[i].z<<"\n";
+    }
 
 }

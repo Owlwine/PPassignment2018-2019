@@ -1,4 +1,5 @@
 TARGET=Curve
+
 SOURCES+=src/main.cpp \
            src/ControlPoint.cpp \
             src/Curve.cpp
