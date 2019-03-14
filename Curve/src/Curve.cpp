@@ -35,3 +35,21 @@ void Curve::showControlPoints() const
     }
 
 }
+
+void Curve::binomialCoeffs(int n,std::vector<size_t> &_C)
+{
+    int k,j;
+
+    for (k = 0; k <= n ; ++k)
+    {
+        _C[k] = 1;
+
+        for (j = n; j >= k+1; --j)
+            _C[k] *= j;
+        for (j = n-k; j >= 2; --j)
+            _C[k] /= j;
+        std::cout<<_C[k];
+
+    }
+
+}

@@ -13,6 +13,7 @@ public:
     size_t getControlPointsNumber() const;
     size_t getCurvePointsNumber() const;
     void showControlPoints() const;
+    void binomialCoeffs(int n,std::vector<size_t> &_C);
     //void renderGL() const;
 private:
     size_t m_numControlPoints=4;
