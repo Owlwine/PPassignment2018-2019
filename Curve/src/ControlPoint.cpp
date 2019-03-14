@@ -1,8 +1,12 @@
 #include "ControlPoint.h"
-#include "Curve.h"
 #include <iostream>
 #include <GL/gl.h>
 #include <random>
+
+ControlPoint::ControlPoint(const Vec3 &_pos)
+{
+    m_position=_pos;
+}
 
 Vec3 ControlPoint::getPosition() const
 {
@@ -12,4 +16,9 @@ Vec3 ControlPoint::getPosition() const
 void ControlPoint::setPosition(const Vec3 &_pos)
 {
     m_position=_pos;
+}
+
+void ControlPoint::render() const
+{
+    std::cout<<m_position.x<<' '<<m_position.y<<' '<<m_position.z<<'\n';
 }
