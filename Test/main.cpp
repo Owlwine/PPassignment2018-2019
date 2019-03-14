@@ -1,7 +1,6 @@
 #include <iostream>
-
 #include "ControlPoint.h"
-
+#include "Curve.h"
 #include <gtest/gtest.h>
 //#include "Curve.h"
 int main(int argc, char **argv)
@@ -60,5 +59,17 @@ TEST(ControlPoint, setPosition)
 
 TEST(ControlPoint, userCtor)
 {
-    ;
+    ControlPoint p({1.0f,3.0f,4.0f});
+    auto pos=p.getPosition();
+    EXPECT_FLOAT_EQ(pos.x,1.0f);
+    EXPECT_FLOAT_EQ(pos.y,3.0f);
+    EXPECT_FLOAT_EQ(pos.z,4.0f);
 }
+
+TEST(Curve, defaultCtor)
+{
+    Curve c;
+    EXPECT_EQ(c.getControlPointsNumber(),4);
+    EXPECT_EQ(c.getCurvePointsNumber(),1000);
+}
+
