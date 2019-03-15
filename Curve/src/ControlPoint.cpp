@@ -1,6 +1,6 @@
 #include "ControlPoint.h"
 #include <iostream>
-#include <GL/gl.h>
+//#include <OpenGL/gl.h>
 #include <random>
 
 ControlPoint::ControlPoint(const Vec3 &_pos)

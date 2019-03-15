@@ -1,5 +1,5 @@
 TARGET=Curve
-
+CONFIG-=app_bundle
 SOURCES+=src/main.cpp \
            src/ControlPoint.cpp \
             src/Curve.cpp

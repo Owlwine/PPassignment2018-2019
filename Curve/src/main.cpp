@@ -17,7 +17,9 @@ int main()
     //std::cout<<c.getControlPointsNumber()<<' '<< c.getCurvePointsNumber()<<"\n";
     //c.showControlPoints();
     std::vector<size_t> C={0,0,0,0};
-    std::vector<Vec3> curvePoints={{0,0,0}};
+    std::vector<Vec3> curvePoints(10);//={{0,0,0}};
     c.binomialCoeffs(numControlPoints-1, C);
-    c.evaluateBezierCurve(numCurvePoints, curvePoints, numControlPoints, controlPoints, C);
+    for(auto c : C)
+      std::cout<<"coef "<<c<<'\n';
+    c.evaluateBezierCurve( curvePoints, numControlPoints, controlPoints, C);
 }
