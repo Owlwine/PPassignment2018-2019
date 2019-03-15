@@ -1,6 +1,8 @@
 #include <iostream>
+#include <cmath>
+#include <stdlib.h>
 #include "Curve.h"
-#include <random>
+
 
 size_t Curve::getControlPointsNumber() const
 {
@@ -13,13 +15,10 @@ size_t Curve::getCurvePointsNumber() const
 }
 
 
-Curve::Curve(const std::vector<Vec3> &_ControlPoints, size_t _numControlPoints, size_t _numCurvePoints)
+void Curve::BezierCurve(const std::vector<Vec3> &_ControlPoints, int _numControlPoints, int _numCurvePoints)
 {
     m_numControlPoints=_numControlPoints;
     m_numCurvePoints=_numCurvePoints;
-    std::random_device rd;  //Will be used to obtain a seed for the random number engine
-    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-
 
     for(size_t i=0;i <_numControlPoints; ++i)
     m_ControlPoints.push_back(_ControlPoints[i]);
@@ -38,18 +37,35 @@ void Curve::showControlPoints() const
 
 void Curve::binomialCoeffs(int n,std::vector<size_t> &_C)
 {
-    int k,j;
+    int k,i;
 
     for (k = 0; k <= n ; ++k)
     {
         _C[k] = 1;
 
-        for (j = n; j >= k+1; --j)
-            _C[k] *= j;
-        for (j = n-k; j >= 2; --j)
-            _C[k] /= j;
-        std::cout<<_C[k];
+        for (i = n; i >= k+1; --i)
+            _C[k] *= i;
+        for (i = n-k; i >= 2; --i)
+            _C[k] /= i;
+       // std::cout<<_C[k];
 
     }
+
+}
+
+void Curve::evaluateBezierCurve(int _nCurvePoints, std::vector<Vec3> &_curvePoints, int _nControlPoints, const std::vector<Vec3> &_controlPoints,const std::vector<size_t> &_C)
+{
+    double bezierBlendingFunction;
+
+    for(int i = 0;i <= _nCurvePoints; ++i)
+        for(int j =0;j < _nControlPoints;++j)
+        {
+            bezierBlendingFunction = _C[j] * pow(double(i)/double(_nCurvePoints),double(j)) * pow(1-(double(i)/double(_nCurvePoints)),double(_nControlPoints -1 -j));
+            std::cout<<i<<' '<<_C[j]<<' '<<pow(double(i)/double(_nCurvePoints),double(j))<<' '<<pow(1-(double(i)/double(_nCurvePoints)),double(_nControlPoints -1 -j))<<' '<<bezierBlendingFunction<<"\n";
+            _curvePoints[i].x += _controlPoints[j].x * bezierBlendingFunction;
+            _curvePoints[i].y += _controlPoints[j].y * bezierBlendingFunction;
+            _curvePoints[i].z += _controlPoints[j].z * bezierBlendingFunction;
+            std::cout<<_curvePoints[i].x<<' '<<_curvePoints[i].y<<' '<<_curvePoints[i].z<<"\n";
+        }
 
 }
