@@ -35,9 +35,9 @@ void Curve::showControlPoints() const
 
 }
 
-void Curve::binomialCoeffs(int n,std::vector<size_t> &_C)
+void Curve::binomialCoeffs(size_t n,std::vector<size_t> &_C)
 {
-    int k,i;
+    size_t k,i;
 
     for (k = 0; k <= n ; ++k)
     {
@@ -53,9 +53,9 @@ void Curve::binomialCoeffs(int n,std::vector<size_t> &_C)
 
 }
 
-void Curve::evaluateBezierCurve(std::vector<Vec3> &_curvePoints, int _nControlPoints, const std::vector<Vec3> &_controlPoints,const std::vector<size_t> &_C)
+void Curve::evaluateBezierCurve(std::vector<Vec3> &_curvePoints, size_t _nControlPoints, const std::vector<Vec3> &_controlPoints,const std::vector<size_t> &_C)
 {
-    double bezierBlendingFunction;
+    float bezierBlendingFunction;
     auto _nCurvePoints=_curvePoints.size();
     for(size_t i = 0;i <= _curvePoints.size(); ++i)
         for(size_t j =0;j < _nControlPoints;++j)
@@ -63,8 +63,8 @@ void Curve::evaluateBezierCurve(std::vector<Vec3> &_curvePoints, int _nControlPo
 //          for(auto c : _C)
 //            std::cout<<"coef "<<c<<'\n';
 
-            bezierBlendingFunction = _C[j] * pow(double(i)/double(_nCurvePoints),double(j)) * pow(1-(double(i)/double(_nCurvePoints)),double(_nControlPoints -1 -j));
-            std::cout<<i<<' '<<_C[j]<<' '<<pow(double(i)/double(_nCurvePoints),double(j))<<' '<<pow(1-(double(i)/double(_nCurvePoints)),double(_nControlPoints -1 -j))<<' '<<bezierBlendingFunction<<"\n";
+            bezierBlendingFunction = _C[j] * powf(float(i)/float(_nCurvePoints),float(j)) * powf(1-(float(i)/float(_nCurvePoints)),float(_nControlPoints -1 -j));
+            std::cout<<i<<' '<<_C[j]<<' '<<powf(float(i)/float(_nCurvePoints),float(j))<<' '<<powf(1-(float(i)/float(_nCurvePoints)),float(_nControlPoints -1 -j))<<' '<<bezierBlendingFunction<<"\n";
             _curvePoints[i].x += _controlPoints[j].x * bezierBlendingFunction;
             _curvePoints[i].y += _controlPoints[j].y * bezierBlendingFunction;
             _curvePoints[i].z += _controlPoints[j].z * bezierBlendingFunction;
