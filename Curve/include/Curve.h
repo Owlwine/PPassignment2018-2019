@@ -14,9 +14,12 @@ public:
     size_t getCurvePointsNumber() const;
     void showControlPoints() const;
     void binomialCoeffs(size_t n, std::vector<size_t> &_C);
-    void evaluateBezierCurve(std::vector<Vec3> &_curvePoints, const std::vector<Vec3> &_controlPoints, const std::vector<size_t> &_C);
+    void evaluateBezierCurve( const std::vector<Vec3> &_controlPoints);
     void getCurvePoints(const std::vector<Vec3> &_curvePoints);
+    void render() const;
     void renderGL() const;
+
+
 private:
     size_t m_numControlPoints=4;
     size_t m_numCurvePoints=1000;

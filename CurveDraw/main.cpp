@@ -43,15 +43,15 @@ int main()
     c.BezierCurve(controlPoints,numControlPoints,numCurvePoints);
     //std::cout<<c.getControlPointsNumber()<<' '<< c.getCurvePointsNumber()<<"\n";
     //c.showControlPoints();
-    std::vector<size_t> C(numControlPoints);
-    std::vector<Vec3> curvePoints(numCurvePoints);//={{0,0,0}};
-    c.binomialCoeffs(numControlPoints-1, C);
+    //std::vector<size_t> C(numControlPoints);
+    //std::vector<Vec3> curvePoints(numCurvePoints);//={{0,0,0}};
+    //c.binomialCoeffs(numControlPoints-1, C);
     /*
     for(auto c : C)
       std::cout<<"coef "<<c<<'\n';
       */
-    c.evaluateBezierCurve( curvePoints, controlPoints, C);
-    c.getCurvePoints(curvePoints);
+    c.evaluateBezierCurve(controlPoints);
+    //c.getCurvePoints(curvePoints);
 
     glMatrixMode(GL_PROJECTION);
     gluPerspective(45.0f,1024.0f/720.0f,0.1f,100.0f);

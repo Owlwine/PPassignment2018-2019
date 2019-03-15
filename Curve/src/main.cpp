@@ -16,17 +16,19 @@ int main()
     c.BezierCurve(controlPoints,numControlPoints,numCurvePoints);
     //std::cout<<c.getControlPointsNumber()<<' '<< c.getCurvePointsNumber()<<"\n";
     //c.showControlPoints();
-    std::vector<size_t> C(numControlPoints);
-    std::vector<Vec3> curvePoints(numCurvePoints);//={{0,0,0}};
-    c.binomialCoeffs(numControlPoints-1, C);
+   // std::vector<size_t> C(numControlPoints);
+    //std::vector<Vec3> curvePoints(numCurvePoints);//={{0,0,0}};
+
     /*
     for(auto c : C)
       std::cout<<"coef "<<c<<'\n';
       */
-    c.evaluateBezierCurve( curvePoints, controlPoints, C);
-    c.getCurvePoints(curvePoints);
+    //c.binomialCoeffs(numControlPoints-1,C);
+    c.evaluateBezierCurve(controlPoints);
+    c.render();
+    //c.getCurvePoints(c.m_CurvePoints);
     //for(size_t i =0; i<numCurvePoints; ++i)
     //std::cout<<curvePoints[i].x<<' '<<curvePoints[i].y<<' '<<curvePoints[i].z<<"\n";
-    c.renderGL();
+    //c.renderGL();
 
 }
