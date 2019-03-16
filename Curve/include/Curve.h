@@ -2,6 +2,7 @@
 #define CURVE_H_
 #include <vector>
 #include "Vec3.h"
+#include <cstdlib>
 class Curve
 {
 public:
@@ -13,8 +14,9 @@ public:
     size_t getCurvePointsNumber() const;
     std::vector<Vec3> getControlPoints() const;
     void showControlPoints() const;
-    void binomialCoeffs(size_t n, std::vector<size_t> &_C);
+    void binomialCoeffs(std::vector<size_t> &_C);
     void evaluateBezierCurve();
+    std::vector<Vec3> getCurvePoints() const;
     void showCurvePoints() const;
     void renderGL() const;
 

@@ -35,8 +35,8 @@ int main()
     bool quit=false;
     SDL_Event event;
 
-    size_t numCurvePoints =100;
-    const std::vector<Vec3> controlPoints ={{2.0,4.0,0.0}, {1.0,5.0,0.0},{3.0,6.0,0.0},{2.0,7.0,0.0}};
+    size_t numCurvePoints =10000;
+    const std::vector<Vec3> controlPoints ={{-10.0f,-10.0f,0.0f}, {-10.0f,10.0f,0.0f},{10.0f,-10.0f,0.0f},{10.0f,10.0f,0.0f}};
     Curve c;
     c.BezierCurve(controlPoints,numCurvePoints);
     c.evaluateBezierCurve();
@@ -44,7 +44,7 @@ int main()
     glMatrixMode(GL_PROJECTION);
     gluPerspective(45.0f,1024.0f/720.0f,0.1f,100.0f);
     glMatrixMode(GL_MODELVIEW);
-    gluLookAt(50,50,50,0,0,0,0,1,0);
+    gluLookAt(0,0,100,0,0,0,0,1,0);
 
     glClearColor(0.8f,0.8f,0.8f,1.0f);
     while(!quit)
