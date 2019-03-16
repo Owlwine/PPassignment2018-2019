@@ -1,5 +1,4 @@
 #include <iostream>
-#include "ControlPoint.h"
 #include "Curve.h"
 #include <gtest/gtest.h>
 //#include "Curve.h"
@@ -37,39 +36,39 @@ TEST(Vec3, plusEqual)
 }
 
 
-TEST(ControlPoint, defaultCtor)
-{
-    ControlPoint p;
-    auto pos=p.getPosition();
-    EXPECT_FLOAT_EQ(pos.x,0.0f);
-    EXPECT_FLOAT_EQ(pos.y,0.0f);
-    EXPECT_FLOAT_EQ(pos.z,0.0f);
-}
-
-
-TEST(ControlPoint, setPosition)
-{
-    ControlPoint p;
-    p.setPosition({0.0f, -2.5,12.0004f});
-    auto pos=p.getPosition();
-    EXPECT_FLOAT_EQ(pos.x,0.0f);
-    EXPECT_FLOAT_EQ(pos.y,-2.5f);
-    EXPECT_FLOAT_EQ(pos.z,12.0004f);
-}
-
-TEST(ControlPoint, userCtor)
-{
-    ControlPoint p({1.0f,3.0f,4.0f});
-    auto pos=p.getPosition();
-    EXPECT_FLOAT_EQ(pos.x,1.0f);
-    EXPECT_FLOAT_EQ(pos.y,3.0f);
-    EXPECT_FLOAT_EQ(pos.z,4.0f);
-}
-
 TEST(Curve, defaultCtor)
 {
     Curve c;
     EXPECT_EQ(c.getControlPointsNumber(),4);
     EXPECT_EQ(c.getCurvePointsNumber(),1000);
+    auto cp=c.getControlPoints();
+    EXPECT_FLOAT_EQ(cp[0].x,1.0f);
+    EXPECT_FLOAT_EQ(cp[0].y,1.0f);
+    EXPECT_FLOAT_EQ(cp[0].z,0.0f);
+    EXPECT_FLOAT_EQ(cp[1].x,2.0f);
+    EXPECT_FLOAT_EQ(cp[1].y,2.0f);
+    EXPECT_FLOAT_EQ(cp[1].z,0.0f);
+    EXPECT_FLOAT_EQ(cp[2].x,3.0f);
+    EXPECT_FLOAT_EQ(cp[2].y,2.0f);
+    EXPECT_FLOAT_EQ(cp[2].z,0.0f);
+    EXPECT_FLOAT_EQ(cp[3].x,4.0f);
+    EXPECT_FLOAT_EQ(cp[3].y,1.0f);
+    EXPECT_FLOAT_EQ(cp[3].z,0.0f);
+}
+
+
+TEST(Curve, BezierCurve)
+{
+    Curve c;
+    c.BezierCurve({{0.0f,3.0f,4.0f},{0.0f,1.1f,2.0f}},100);
+    EXPECT_EQ(c.getControlPointsNumber(),2);
+    EXPECT_EQ(c.getCurvePointsNumber(),100);
+    auto cp=c.getControlPoints();
+    EXPECT_FLOAT_EQ(cp[0].x,0.0f);
+    EXPECT_FLOAT_EQ(cp[0].y,3.0f);
+    EXPECT_FLOAT_EQ(cp[0].z,4.0f);
+    EXPECT_FLOAT_EQ(cp[1].x,0.0f);
+    EXPECT_FLOAT_EQ(cp[1].y,1.1f);
+    EXPECT_FLOAT_EQ(cp[1].z,2.0f);
 }
 

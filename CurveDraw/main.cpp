@@ -3,7 +3,6 @@
 #include <GL/gl.h>
 #include<GL/glu.h>
 #include "Curve.h"
-void render(const Curve &_Curve);
 
 int main()
 {
@@ -36,22 +35,11 @@ int main()
     bool quit=false;
     SDL_Event event;
 
-    size_t numControlPoints = 4;
     size_t numCurvePoints =100;
     const std::vector<Vec3> controlPoints ={{2.0,4.0,0.0}, {1.0,5.0,0.0},{3.0,6.0,0.0},{2.0,7.0,0.0}};
     Curve c;
-    c.BezierCurve(controlPoints,numControlPoints,numCurvePoints);
-    //std::cout<<c.getControlPointsNumber()<<' '<< c.getCurvePointsNumber()<<"\n";
-    //c.showControlPoints();
-    //std::vector<size_t> C(numControlPoints);
-    //std::vector<Vec3> curvePoints(numCurvePoints);//={{0,0,0}};
-    //c.binomialCoeffs(numControlPoints-1, C);
-    /*
-    for(auto c : C)
-      std::cout<<"coef "<<c<<'\n';
-      */
-    c.evaluateBezierCurve(controlPoints);
-    //c.getCurvePoints(curvePoints);
+    c.BezierCurve(controlPoints,numCurvePoints);
+    c.evaluateBezierCurve();
 
     glMatrixMode(GL_PROJECTION);
     gluPerspective(45.0f,1024.0f/720.0f,0.1f,100.0f);
@@ -80,30 +68,9 @@ int main()
             */
             }
         }
-        glClear(GL_COLOR_BUFFER_BIT);
-        //Curve.update();
-
-        //render(c);
+        glClear(GL_COLOR_BUFFER_BIT);        
         c.renderGL();
         SDL_GL_SwapWindow(window);
     }
 }
 
-void render(const Curve &_Curve)
-{
-    /*
-    glPointSize(24.0);
-    glBegin(GL_POINTS);
-        auto p=_Curve.getPos();
-        glColor3f(1.0,0.0,0.0);
-        glVertex3f(p.x,p.y,p.z);
-    glEnd();
-    */
-
-    glPointSize(100.0);
-    glBegin(GL_POINTS);
-    glColor3f(1.0f,0.0f,0.0f);
-    glVertex3f(0,0,0);
-    _Curve.renderGL();
-    glEnd();
-}
