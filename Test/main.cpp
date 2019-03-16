@@ -1,7 +1,6 @@
 #include <iostream>
-#include "Curve.h"
 #include <gtest/gtest.h>
-//#include "Curve.h"
+#include "Curve.h"
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc,argv);

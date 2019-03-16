@@ -6,7 +6,6 @@
 *.a
 *.core
 *.moc
-*.o
 *.obj
 *.orig
 *.rej
@@ -23,7 +22,6 @@ tags
 .DS_Store
 .directory
 *.debug
-Makefile*
 *.prl
 *.app
 moc_*.cpp
