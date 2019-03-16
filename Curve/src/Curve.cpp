@@ -21,7 +21,7 @@ void Curve::BezierCurve(const std::vector<Vec3> &_ControlPoints,  size_t _numCur
 
     while (m_numControlPoints > 0)
     {
-        m_ControlPoints.pop_back();
+        m_controlPoints.pop_back();
         --m_numControlPoints;
     }
 
@@ -29,18 +29,18 @@ void Curve::BezierCurve(const std::vector<Vec3> &_ControlPoints,  size_t _numCur
     m_numCurvePoints=_numCurvePoints;
 
     for(size_t i=0;i <m_numControlPoints; ++i)
-    m_ControlPoints.push_back(_ControlPoints[i]);
+    m_controlPoints.push_back(_ControlPoints[i]);
 }
 
 std::vector<Vec3> Curve::getControlPoints() const
 {
-    return m_ControlPoints;
+    return m_controlPoints;
 }
 void Curve::showControlPoints() const
 {
     for(size_t i=0;i <m_numControlPoints; ++i)
     {
-        std::cout<<m_ControlPoints[i].x<<' '<<m_ControlPoints[i].y<<' '<<m_ControlPoints[i].z<<"\n";
+        std::cout<<m_controlPoints[i].x<<' '<<m_controlPoints[i].y<<' '<<m_controlPoints[i].z<<"\n";
     }
 }
 
@@ -70,23 +70,23 @@ void Curve::evaluateBezierCurve( )
         for(size_t j =0;j < m_numControlPoints;++j)
         {
             bezierBlendingFunction = C[j] * powf(float(i)/float(m_numCurvePoints),float(j)) * powf(1-(float(i)/float(m_numCurvePoints)),float((m_numControlPoints -1) -j));            
-            _CurvePoints[i].x += m_ControlPoints[j].x * bezierBlendingFunction;
-            _CurvePoints[i].y += m_ControlPoints[j].y * bezierBlendingFunction;
-            _CurvePoints[i].z += m_ControlPoints[j].z * bezierBlendingFunction;
+            _CurvePoints[i].x += m_controlPoints[j].x * bezierBlendingFunction;
+            _CurvePoints[i].y += m_controlPoints[j].y * bezierBlendingFunction;
+            _CurvePoints[i].z += m_controlPoints[j].z * bezierBlendingFunction;
         }
 
     for(size_t i = 0;i < m_numCurvePoints; ++i)
-        m_CurvePoints.push_back(_CurvePoints[i]);
+        m_curvePoints.push_back(_CurvePoints[i]);
 }
 
 std::vector<Vec3> Curve::getCurvePoints() const
 {
-    return m_CurvePoints;
+    return m_curvePoints;
 }
 void Curve::showCurvePoints()const
 {
     for(size_t i = 0;i < m_numCurvePoints; ++i)
-           std::cout<<m_CurvePoints[i].x<<' '<<m_CurvePoints[i].y<<' '<<m_CurvePoints[i].z<<'\n';
+           std::cout<<m_curvePoints[i].x<<' '<<m_curvePoints[i].y<<' '<<m_curvePoints[i].z<<'\n';
 }
 
 
@@ -97,7 +97,7 @@ void Curve::renderGL() const
         glPointSize(2.0);
         glBegin(GL_POINTS);
         glColor3f(1.0f,0.0f,0.0f);
-        glVertex3f(m_CurvePoints[i].x,m_CurvePoints[i].y,m_CurvePoints[i].z);        
+        glVertex3f(m_curvePoints[i].x,m_curvePoints[i].y,m_curvePoints[i].z);
         glEnd();
     }
 }

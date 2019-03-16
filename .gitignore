@@ -1,6 +1,6 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
-
+*.o
 *~
 *.autosave
 *.a
@@ -15,6 +15,7 @@
 *_resource.rc
 *.qm
 .#*
+Makefile*
 *.*#
 core
 !core/

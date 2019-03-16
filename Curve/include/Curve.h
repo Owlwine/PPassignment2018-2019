@@ -24,7 +24,7 @@ public:
 private:
     size_t m_numControlPoints=4;
     size_t m_numCurvePoints=1000;
-    std::vector<Vec3> m_ControlPoints={{1.0f,1.0f,0.0f},{2.0f,2.0f,0.0f},{3.0f,2.0f,0.0f},{4.0f,1.0f,0.0f}};
-    std::vector<Vec3> m_CurvePoints;
+    std::vector<Vec3> m_controlPoints={{1.0f,1.0f,0.0f},{2.0f,2.0f,0.0f},{3.0f,2.0f,0.0f},{4.0f,1.0f,0.0f}};
+    std::vector<Vec3> m_curvePoints;
 };
 #endif

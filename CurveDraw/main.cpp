@@ -36,7 +36,7 @@ int main()
     SDL_Event event;
 
     size_t numCurvePoints =10000;
-    const std::vector<Vec3> controlPoints ={{-10.0f,-10.0f,0.0f}, {-10.0f,10.0f,0.0f},{10.0f,-10.0f,0.0f},{10.0f,10.0f,0.0f}};
+    const std::vector<Vec3> controlPoints ={{-10.0f,-10.0f,0.0f},{-20.0f,-15.0f,0.0f},{-10.0f,10.0f,0.0f},{10.0f,-10.0f,0.0f},{10.0f,10.0f,0.0f}};
     Curve c;
     c.BezierCurve(controlPoints,numCurvePoints);
     c.evaluateBezierCurve();
