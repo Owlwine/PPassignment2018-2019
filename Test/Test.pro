@@ -1,8 +1,10 @@
-TARGET=Test
-SOURCES+= src/main.cpp
+TARGET  = Test
 
-INCLUDEPATH+=/usr/local/include
-INCLUDEPATH+= ../Curve/include
-LIBS+= -L/usr/local/lib -lgtest -L../Curve -lCurve
+SOURCES += src/main.cpp
 
-CONFIG+=c++11
+INCLUDEPATH +=  /usr/local/include
+INCLUDEPATH += ../Curve/include
+
+LIBS  += -L/usr/local/lib -lgtest -L../Curve -lCurve
+
+CONFIG  +=  c++11
