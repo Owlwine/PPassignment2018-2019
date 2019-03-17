@@ -16,10 +16,10 @@ size_t Curve::getCurvePointsNumber() const
     return m_numCurvePoints;
 }
 
-
+//initialize the curve to be a bezier curve
 void Curve::bezierCurve( const std::vector<Vec3> &_controlPoints,  const size_t _numCurvePoints )
 {
-
+    //empty default control points vector
     while ( m_numControlPoints > 0 )
     {        
         m_controlPoints.pop_back();
@@ -30,7 +30,9 @@ void Curve::bezierCurve( const std::vector<Vec3> &_controlPoints,  const size_t 
     m_numCurvePoints = _numCurvePoints;
 
     for( size_t i=0; i < m_numControlPoints; ++i )
-    m_controlPoints.push_back( _controlPoints[i] );
+    {
+        m_controlPoints.push_back( _controlPoints[i] );
+    }
 }
 
 std::vector<Vec3> Curve::getControlPoints() const
@@ -48,24 +50,39 @@ void Curve::showControlPoints() const
 
 /// The following function is modified from :-
 /// Donald Hearn, M.Pauline Baker, Warren R.Carithers (2014). Computer Graphics with OpenGL, Fourth Edition.
+// Compute n! / ( k! * ( n - k )! )
 void Curve::binomialCoeffs( std::vector<size_t> &io_c )
 {
-    size_t i, n = io_c.size() -1;
+    size_t i;
+
+    //When computing binomial coefficient in a bezier curve, n = (control points amount - 1)
+    size_t n = io_c.size() -1;
+
     for ( size_t k = 0; k <= n ; ++k )
     {
         io_c[k] = 1;
 
         for ( i = n; i >= k+1; --i )
+        {
             io_c[k] *= i;
+        }
+
         for ( i = n-k; i >= 2; --i )
+        {
             io_c[k] /= i;
+        }
     }
 }
 /// end of Citation
 
+//Evaluate and generate the points on a bezier curve
 void Curve::evaluateBezierCurve( )
 {
+    //The bezier blending function is Bernstein polynomial. The expression is \
+    //C( n , k ) * u^k * ( 1 - u )^( n - k ), 0 <= u <= 1. C( n , k ) is binomial coefficient , \
+    //while n euqals to control points' amount minus 1.
     float bezierBlendingFunction;
+
     std::vector<size_t> C( m_numControlPoints );
     std::vector<Vec3> CurvePoints( m_numCurvePoints );
 
@@ -73,19 +90,29 @@ void Curve::evaluateBezierCurve( )
     /// The following section is modified from :-
     /// Donald Hearn, M.Pauline Baker, Warren R.Carithers (2014). Computer Graphics with OpenGL, Fourth Edition.
     binomialCoeffs(C);
+
     for( size_t i = 0; i < m_numCurvePoints; ++i )
-        for( size_t j = 0; j < m_numControlPoints; ++j )
+    {
+        for( size_t k = 0; k < m_numControlPoints; ++k )
         {
-            bezierBlendingFunction = C[j] * powf(float(i)/float(m_numCurvePoints), float(j)) *
-                                     powf( 1-(float(i)/float(m_numCurvePoints)), float((m_numControlPoints -1) -j));
-            CurvePoints[i].x += m_controlPoints[j].x * bezierBlendingFunction;
-            CurvePoints[i].y += m_controlPoints[j].y * bezierBlendingFunction;
-            CurvePoints[i].z += m_controlPoints[j].z * bezierBlendingFunction;
+            bezierBlendingFunction = C[k] * powf( float(i) / float(m_numCurvePoints), float(k) ) *
+                                     powf( 1 - ( float(i) / float(m_numCurvePoints) ),
+                                           float( ( m_numControlPoints - 1 ) - k ) );
+
+            //When evaluating points on a bezier curve, a curve point is equal to \
+            //a control point multiply the bezier blending function
+            CurvePoints[i].x += m_controlPoints[k].x * bezierBlendingFunction;
+            CurvePoints[i].y += m_controlPoints[k].y * bezierBlendingFunction;
+            CurvePoints[i].z += m_controlPoints[k].z * bezierBlendingFunction;
         }
+    }
     /// end of Citation
 
+    //Store the calculated points into the member of the curve type object
     for( size_t i = 0;i < m_numCurvePoints; ++i )
+    {
         m_curvePoints.push_back( CurvePoints[i] );
+    }
 }
 
 std::vector<Vec3> Curve::getCurvePoints() const
@@ -96,16 +123,24 @@ std::vector<Vec3> Curve::getCurvePoints() const
 void Curve::showCurvePoints()const
 {
     for( size_t i = 0;i < m_numCurvePoints; ++i )
-           std::cout<<m_curvePoints[i].x<<' '<<m_curvePoints[i].y<<' '<<m_curvePoints[i].z<<'\n';
+    {
+        std::cout<<m_curvePoints[i].x<<' '<<m_curvePoints[i].y<<' '<<m_curvePoints[i].z<<'\n';
+    }
 }
 
 void Curve::renderGL() const
 {
     for( size_t i = 0;i < m_numCurvePoints; ++i )
     {
+        //set the point size to 2
         glPointSize( 2.0 );
+
         glBegin( GL_POINTS );
+
+        //set the point colour to red
         glColor3f( 1.0f, 0.0f, 0.0f) ;
+
+        //draw the points on the curve
         glVertex3f( m_curvePoints[i].x, m_curvePoints[i].y, m_curvePoints[i].z );
         glEnd();
     }

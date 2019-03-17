@@ -18,6 +18,7 @@ struct Vec3
     Vec3( const Vec3 & )=default;
     Vec3( float _x, float _y, float _z ) :
         x(_x), y(_y), z(_z){}
+
     void operator +=( const Vec3 &_rhs )
     {
         x+=_rhs.x;

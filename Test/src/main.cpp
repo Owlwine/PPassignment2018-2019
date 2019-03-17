@@ -16,7 +16,7 @@ int main( int argc, char **argv )
     return RUN_ALL_TESTS();
 }
 
-
+//Test if default constructor works
 TEST( Vec3, defaultCtor )
 {
     Vec3 a;
@@ -25,6 +25,7 @@ TEST( Vec3, defaultCtor )
     EXPECT_FLOAT_EQ( a.z, 0.0f );
 }
 
+//Test if user constructor works
 TEST( Vec3, userCtor )
 {
     Vec3 b( 0.2f, 1.0f, -5.0f );
@@ -33,6 +34,7 @@ TEST( Vec3, userCtor )
     EXPECT_FLOAT_EQ( b.z, -5.0f );
 }
 
+//Test if operator "+=" works
 TEST( Vec3, plusEqual )
 {
     Vec3 a( 1.0f, 2.0f, 3.0f );
@@ -43,7 +45,7 @@ TEST( Vec3, plusEqual )
     EXPECT_FLOAT_EQ( a.z, 4.0f );
 }
 
-
+//Test if default constructor works
 TEST( Curve, defaultCtor )
 {
     Curve c;
@@ -64,7 +66,8 @@ TEST( Curve, defaultCtor )
     EXPECT_FLOAT_EQ( cp[3].z, 0.0f );
 }
 
-
+//Test if it is able to initialize a bezier curve by giving a set of \
+//control points and the amount of points to generate the curve
 TEST( Curve, bezierCurve )
 {
     Curve c;
@@ -80,6 +83,7 @@ TEST( Curve, bezierCurve )
     EXPECT_FLOAT_EQ( cp[1].z, 2.0f );
 }
 
+//Test if it is able to calculate binomial cofficient
 TEST( Curve, binomialCoeffs )
 {
     std::vector<size_t> C( 5 );
@@ -92,19 +96,29 @@ TEST( Curve, binomialCoeffs )
     EXPECT_EQ( C[4], 1 );
 }
 
+//Test if it is able to evaluate and generate a bezier cure, either by using default \
+//values, or by using customized values(control points and the quantity of points to \
+//generate the curve). If the bezier curve is generated successfully, the the first \
+//and the last point will go through the first and last control points. It is acceptable \
+//if the results are close enough reasonably.
 TEST( Curve, evaluateBezierCurve )
 {
     Curve c;
     c.evaluateBezierCurve();
     auto cop = c.getControlPoints();
     auto cup = c.getCurvePoints();
+
+    //comparing the first curve point and the first control point
     EXPECT_FLOAT_EQ( cup[0].x, cop[0].x );
     EXPECT_FLOAT_EQ( cup[0].y, cop[0].y );
     EXPECT_FLOAT_EQ( cup[0].z, cop[0].z );
+
+    //comparing the last curve point and the last control point
     EXPECT_EQ( abs( cup[c.getCurvePointsNumber()-1].x - cop[c.getControlPointsNumber()-1].x ) < 0.02f, 1 );
     EXPECT_EQ( abs( cup[c.getCurvePointsNumber()-1].y - cop[c.getControlPointsNumber()-1].y ) < 0.02f, 1 );
     EXPECT_EQ( abs( cup[c.getCurvePointsNumber()-1].z - cop[c.getControlPointsNumber()-1].z ) < 0.02f, 1 );
 
+    //test with customized values
     Curve c1;
     c1.bezierCurve( {{0.0f,3.0f,4.0f}, {0.0f,1.1f,2.0f}, {2.0f,9.1f,1.0f}}, 1000 );
     c1.evaluateBezierCurve();

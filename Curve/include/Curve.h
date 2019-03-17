@@ -27,15 +27,22 @@ public:
     Curve( const Curve & )=delete;
     Curve & operator=( const Curve & )=delete ;
 
+    //initialize a bezier curve
     void                bezierCurve( const std::vector<Vec3> &_controlPoints, const size_t _numCurvePoints );
+
     size_t              getControlPointsNumber() const;
     size_t              getCurvePointsNumber() const;
     std::vector<Vec3>   getControlPoints() const;
     void                showControlPoints() const;
+
+    //calculate binomial coefficient
     void                binomialCoeffs( std::vector<size_t> &io_c );
+
     void                evaluateBezierCurve();
     std::vector<Vec3>   getCurvePoints() const;
     void                showCurvePoints() const;
+
+    //render the curve points after calculation
     void                renderGL() const;
 
 
