@@ -1,7 +1,8 @@
+///
+/// @file Curve.cpp
+/// @brief functions for generating curves
+
 #include <iostream>
-#include <cmath>
-#include <stdlib.h>
-#include <GL/gl.h>
 #include "Curve.h"
 
 
@@ -16,7 +17,7 @@ size_t Curve::getCurvePointsNumber() const
 }
 
 
-void Curve::BezierCurve(const std::vector<Vec3> &_ControlPoints,  size_t _numCurvePoints)
+void Curve::bezierCurve(const std::vector<Vec3> &_controlPoints,  const size_t _numCurvePoints)
 {
 
     while (m_numControlPoints > 0)
@@ -25,17 +26,18 @@ void Curve::BezierCurve(const std::vector<Vec3> &_ControlPoints,  size_t _numCur
         --m_numControlPoints;
     }
 
-    m_numControlPoints=_ControlPoints.size();
+    m_numControlPoints=_controlPoints.size();
     m_numCurvePoints=_numCurvePoints;
 
     for(size_t i=0;i <m_numControlPoints; ++i)
-    m_controlPoints.push_back(_ControlPoints[i]);
+    m_controlPoints.push_back(_controlPoints[i]);
 }
 
 std::vector<Vec3> Curve::getControlPoints() const
 {
     return m_controlPoints;
 }
+
 void Curve::showControlPoints() const
 {
     for(size_t i=0;i <m_numControlPoints; ++i)
@@ -44,17 +46,17 @@ void Curve::showControlPoints() const
     }
 }
 
-void Curve::binomialCoeffs(std::vector<size_t> &_C)
+void Curve::binomialCoeffs(std::vector<size_t> &io_c)
 {
-    size_t i, n = _C.size() -1;
+    size_t i, n = io_c.size() -1;
     for (size_t k = 0; k <= n ; ++k)
     {
-        _C[k] = 1;
+        io_c[k] = 1;
 
         for (i = n; i >= k+1; --i)
-            _C[k] *= i;
+            io_c[k] *= i;
         for (i = n-k; i >= 2; --i)
-            _C[k] /= i;
+            io_c[k] /= i;
     }
 }
 
@@ -62,7 +64,7 @@ void Curve::evaluateBezierCurve( )
 {
     float bezierBlendingFunction;
     std::vector<size_t> C(m_numControlPoints);
-    std::vector<Vec3> _CurvePoints(m_numCurvePoints);
+    std::vector<Vec3> CurvePoints(m_numCurvePoints);
 
 
     binomialCoeffs(C);
@@ -70,13 +72,13 @@ void Curve::evaluateBezierCurve( )
         for(size_t j =0;j < m_numControlPoints;++j)
         {
             bezierBlendingFunction = C[j] * powf(float(i)/float(m_numCurvePoints),float(j)) * powf(1-(float(i)/float(m_numCurvePoints)),float((m_numControlPoints -1) -j));            
-            _CurvePoints[i].x += m_controlPoints[j].x * bezierBlendingFunction;
-            _CurvePoints[i].y += m_controlPoints[j].y * bezierBlendingFunction;
-            _CurvePoints[i].z += m_controlPoints[j].z * bezierBlendingFunction;
+            CurvePoints[i].x += m_controlPoints[j].x * bezierBlendingFunction;
+            CurvePoints[i].y += m_controlPoints[j].y * bezierBlendingFunction;
+            CurvePoints[i].z += m_controlPoints[j].z * bezierBlendingFunction;
         }
 
     for(size_t i = 0;i < m_numCurvePoints; ++i)
-        m_curvePoints.push_back(_CurvePoints[i]);
+        m_curvePoints.push_back(CurvePoints[i]);
 }
 
 std::vector<Vec3> Curve::getCurvePoints() const

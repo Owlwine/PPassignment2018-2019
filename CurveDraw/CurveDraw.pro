@@ -1,6 +1,6 @@
 TARGET=CurveDraw
-SOURCES+=main.cpp\
-         ../Curve/src/Curve.cpp\
+SOURCES+= src/main.cpp\
+
 
 
 QMAKE_CXXFLAGS+=$$system(pkg-config --cflags sdl2)
