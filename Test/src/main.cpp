@@ -3,11 +3,9 @@
 /// @brief tests for functions
 
 
-#include <iostream>
-
 #include <gtest/gtest.h>
 
-#include "Curve.h"
+#include "Surface.h"
 
 
 int main( int argc, char **argv )
@@ -66,14 +64,12 @@ TEST( Curve, defaultCtor )
     EXPECT_FLOAT_EQ( cp[3].z, 0.0f );
 }
 
-//Test if it is able to initialize a bezier curve by giving a set of \
-//control points and the amount of points to generate the curve
-TEST( Curve, bezierCurve )
+//Test if user constructor works
+TEST( Curve, userCtor )
 {
-    Curve c;
-    c.bezierCurve( {{0.0f,3.0f,4.0f}, {0.0f,1.1f,2.0f}}, 100 );
+    Curve c( { {0.0f,3.0f,4.0f}, {0.0f,1.1f,2.0f} }, 10);
     EXPECT_EQ( c.getControlPointsNumber(), 2 );
-    EXPECT_EQ( c.getCurvePointsNumber(), 100 );
+    EXPECT_EQ( c.getCurvePointsNumber(), 10 );
     auto cp = c.getControlPoints();
     EXPECT_FLOAT_EQ( cp[0].x, 0.0f );
     EXPECT_FLOAT_EQ( cp[0].y, 3.0f );
@@ -82,6 +78,7 @@ TEST( Curve, bezierCurve )
     EXPECT_FLOAT_EQ( cp[1].y, 1.1f );
     EXPECT_FLOAT_EQ( cp[1].z, 2.0f );
 }
+
 
 //Test if it is able to calculate binomial cofficient
 TEST( Curve, binomialCoeffs )
@@ -119,8 +116,7 @@ TEST( Curve, evaluateBezierCurve )
     EXPECT_EQ( abs( cup[c.getCurvePointsNumber()-1].z - cop[c.getControlPointsNumber()-1].z ) < 0.02f, 1 );
 
     //test with customized values
-    Curve c1;
-    c1.bezierCurve( {{0.0f,3.0f,4.0f}, {0.0f,1.1f,2.0f}, {2.0f,9.1f,1.0f}}, 1000 );
+    Curve c1( {{0.0f,3.0f,4.0f}, {0.0f,1.1f,2.0f}, {2.0f,9.1f,1.0f}}, 1000 );
     c1.evaluateBezierCurve();
     auto cop1 = c1.getControlPoints();
     auto cup1 = c1.getCurvePoints();
@@ -130,4 +126,49 @@ TEST( Curve, evaluateBezierCurve )
     EXPECT_EQ( abs( cup1[c1.getCurvePointsNumber()-1].x - cop1[c1.getControlPointsNumber()-1].x ) < 0.02f, 1 );
     EXPECT_EQ( abs( cup1[c1.getCurvePointsNumber()-1].y - cop1[c1.getControlPointsNumber()-1].y ) < 0.02f, 1 );
     EXPECT_EQ( abs( cup1[c1.getCurvePointsNumber()-1].z - cop1[c1.getControlPointsNumber()-1].z ) < 0.02f, 1 );
+}
+
+//Test if default constructor works
+TEST( Surface, defaultCtor )
+{
+    Surface s;
+    EXPECT_EQ( s.getSurfaceRow(), 4 );
+    EXPECT_EQ( s.getSurfaceColumn(), 3 );
+    auto cp = s.getSurfaceControlPoints();
+    EXPECT_FLOAT_EQ( cp[0].x, -10.0f );
+    EXPECT_FLOAT_EQ( cp[0].y, -10.0f );
+    EXPECT_FLOAT_EQ( cp[0].z, 5.0f );
+    EXPECT_FLOAT_EQ( cp[1].x, 0.0f );
+    EXPECT_FLOAT_EQ( cp[1].y, 20.0f );
+    EXPECT_FLOAT_EQ( cp[1].z, 6.0f );
+    EXPECT_FLOAT_EQ( cp[2].x, 10.0f );
+    EXPECT_FLOAT_EQ( cp[2].y, 10.0f );
+    EXPECT_FLOAT_EQ( cp[2].z, 0.0f );
+    EXPECT_FLOAT_EQ( cp[3].x, -10.0f );
+    EXPECT_FLOAT_EQ( cp[3].y, -10.0f );
+    EXPECT_FLOAT_EQ( cp[3].z, 0.0f );
+    EXPECT_FLOAT_EQ( cp[4].x, 0.0f );
+    EXPECT_FLOAT_EQ( cp[4].y, 20.0f );
+    EXPECT_FLOAT_EQ( cp[4].z, 0.0f );
+    EXPECT_FLOAT_EQ( cp[5].x, 10.0f );
+    EXPECT_FLOAT_EQ( cp[5].y, 10.0f );
+    EXPECT_FLOAT_EQ( cp[5].z, -5.0f );
+    EXPECT_FLOAT_EQ( cp[6].x, -10.0f );
+    EXPECT_FLOAT_EQ( cp[6].y, -10.0f );
+    EXPECT_FLOAT_EQ( cp[6].z, -5.0f );
+    EXPECT_FLOAT_EQ( cp[7].x, 0.0f );
+    EXPECT_FLOAT_EQ( cp[7].y, 20.0f );
+    EXPECT_FLOAT_EQ( cp[7].z, -6.0f );
+    EXPECT_FLOAT_EQ( cp[8].x, 10.0f );
+    EXPECT_FLOAT_EQ( cp[8].y, 10.0f );
+    EXPECT_FLOAT_EQ( cp[8].z, -10.0f );
+    EXPECT_FLOAT_EQ( cp[9].x, -10.0f );
+    EXPECT_FLOAT_EQ( cp[9].y, -10.0f );
+    EXPECT_FLOAT_EQ( cp[9].z, -10.0f );
+    EXPECT_FLOAT_EQ( cp[10].x, 0.0f );
+    EXPECT_FLOAT_EQ( cp[10].y, 20.0f );
+    EXPECT_FLOAT_EQ( cp[10].z, -12.0f );
+    EXPECT_FLOAT_EQ( cp[11].x, 10.0f );
+    EXPECT_FLOAT_EQ( cp[11].y, 10.0f );
+    EXPECT_FLOAT_EQ( cp[11].z, -15.0f );
 }

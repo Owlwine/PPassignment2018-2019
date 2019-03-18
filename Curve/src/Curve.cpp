@@ -2,9 +2,25 @@
 /// @file Curve.cpp
 /// @brief functions for generating curves
 
-#include <iostream>
 #include "Curve.h"
+#include "Surface.h"
 
+Curve::Curve(const std::vector<Vec3> &_controlPoints , const size_t _numCurvePoints)
+{
+    //empty default control points vector
+    while ( m_numControlPoints > 0 )
+    {
+        m_controlPoints.pop_back();
+        --m_numControlPoints;
+    }
+
+    m_numControlPoints = _controlPoints.size();
+    m_numCurvePoints = _numCurvePoints;
+    for( size_t i=0; i < m_numControlPoints; ++i )
+    {
+        m_controlPoints.push_back( _controlPoints[i] );
+    }
+}
 
 size_t Curve::getControlPointsNumber() const
 {
@@ -16,25 +32,6 @@ size_t Curve::getCurvePointsNumber() const
     return m_numCurvePoints;
 }
 
-//initialize the curve to be a bezier curve
-void Curve::bezierCurve( const std::vector<Vec3> &_controlPoints,  const size_t _numCurvePoints )
-{
-    //empty default control points vector
-    while ( m_numControlPoints > 0 )
-    {        
-        m_controlPoints.pop_back();
-        --m_numControlPoints;
-    }
-
-    m_numControlPoints = _controlPoints.size();
-    m_numCurvePoints = _numCurvePoints;
-
-    for( size_t i=0; i < m_numControlPoints; ++i )
-    {
-        m_controlPoints.push_back( _controlPoints[i] );
-    }
-}
-
 std::vector<Vec3> Curve::getControlPoints() const
 {
     return m_controlPoints;
@@ -44,7 +41,7 @@ void Curve::showControlPoints() const
 {
     for( size_t i = 0; i < m_numControlPoints; ++i )
     {
-        std::cout<<m_controlPoints[i].x<<' '<<m_controlPoints[i].y<<' '<<m_controlPoints[i].z<<"\n";
+        std::cout<< m_controlPoints[i].x <<' '<< m_controlPoints[i].y <<' '<< m_controlPoints[i].z <<'\n';
     }
 }
 
@@ -124,12 +121,16 @@ void Curve::showCurvePoints()const
 {
     for( size_t i = 0;i < m_numCurvePoints; ++i )
     {
-        std::cout<<m_curvePoints[i].x<<' '<<m_curvePoints[i].y<<' '<<m_curvePoints[i].z<<'\n';
+        std::cout<< m_curvePoints[i].x <<' '<< m_curvePoints[i].y <<' '<< m_curvePoints[i].z <<'\n';
     }
 }
 
-void Curve::renderGL() const
+void Curve::renderCurve() const
 {
+    double_t r = 0.0 ;
+    double_t g = 0.0 ;
+    double_t b = 0.0 ;
+
     for( size_t i = 0;i < m_numCurvePoints; ++i )
     {
         //set the point size to 2
@@ -137,8 +138,14 @@ void Curve::renderGL() const
 
         glBegin( GL_POINTS );
 
-        //set the point colour to red
-        glColor3f( 1.0f, 0.0f, 0.0f) ;
+        //set the points colours according to the position, using mod() function and getting \
+        //the absolute values
+        r = abs( fmod( m_curvePoints[i].x , 255.0f ) );
+        g = abs( fmod( m_curvePoints[i].y , 255.0f ) );
+        b = abs( fmod( m_curvePoints[i].z , 255.0f ) );
+        //std::cout<<r<< ' '<< g <<' '<< b<<'\n';
+        glColor3f( r, g, b );
+       // std::cout<<r<< ' '<< g <<' '<< b<<'\n';
 
         //draw the points on the curve
         glVertex3f( m_curvePoints[i].x, m_curvePoints[i].y, m_curvePoints[i].z );

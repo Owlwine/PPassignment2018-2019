@@ -2,12 +2,11 @@
 /// @file main.cpp
 /// @brief generate curves without drawing
 
-#include <iostream>
 
 #include <GL/glu.h>
 #include <SDL.h>
 
-#include "Curve.h"
+#include "Surface.h"
 
 
 int main()
@@ -20,7 +19,7 @@ int main()
         exit( EXIT_FAILURE) ;
     }
 
-    SDL_Window *window= SDL_CreateWindow("Particle",
+    SDL_Window *window= SDL_CreateWindow("Curve",
                                          SDL_WINDOWPOS_CENTERED,
                                          SDL_WINDOWPOS_CENTERED,
                                          1024,
@@ -43,10 +42,14 @@ int main()
     SDL_Event event;
 
     size_t numCurvePoints = 10000;
-    const std::vector<Vec3> controlPoints = {{-10.0f,-10.0f,0.0f}, {-20.0f,-15.0f,0.0f}, {-10.0f,10.0f,0.0f}, {10.0f,-10.0f,0.0f}, {10.0f,10.0f,0.0f}};
-    Curve c;
-    c.bezierCurve( controlPoints, numCurvePoints );
-    c.evaluateBezierCurve();
+    //const std::vector<Vec3> controlPoints = { { -10.0f, -10.0f, 0.0f }, { -20.0f, -15.0f, 20.0f },
+    //                                          { -10.0f, 10.0f, 0.0f }, { 10.0f, -10.0f, 0.0f } };
+    //Curve c( controlPoints , numCurvePoints );
+    //c.evaluateBezierCurve();
+
+    Surface s;
+    s.generateSurface(numCurvePoints);
+
 
     glMatrixMode( GL_PROJECTION );
     gluPerspective( 45.0f, 1024.0f / 720.0f, 0.1f, 100.0f );
@@ -76,7 +79,8 @@ int main()
             }
         }
         glClear( GL_COLOR_BUFFER_BIT );
-        c.renderGL();
+        //c.renderCurve();
+        s.renderSurface();
         SDL_GL_SwapWindow( window );
     }
 }

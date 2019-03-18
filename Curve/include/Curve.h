@@ -1,5 +1,5 @@
 /// \file Curve.h
-/// \brief generate different types of curves
+/// \brief generate different types of curves (currently bezier curve)
 /// \author Ming Yan
 /// \version 1.0
 /// \date 17/3/19 Updated to NCCA/programming-paradigms-201819-Owlwine
@@ -15,20 +15,23 @@
 #include <cmath>
 #include <cstdlib>
 #include <GL/gl.h>
+#include <iostream>
 #include <stdlib.h>
 #include <vector>
 
 #include "Vec3.h"
 
+
 class Curve
 {
 public:
-    Curve()=default;
-    Curve( const Curve & )=delete;
-    Curve & operator=( const Curve & )=delete ;
+    Curve() = default;
+    Curve( const Curve & ) = default;
+    Curve( Curve && ) = default; //move ctor
+    Curve( const std::vector<Vec3> &_controlPoints, const size_t _numCurvePoints );
 
-    //initialize a bezier curve
-    void                bezierCurve( const std::vector<Vec3> &_controlPoints, const size_t _numCurvePoints );
+    Curve & operator = ( const Curve & ) = default;
+    Curve & operator = ( Curve && ) = default; //move assign
 
     size_t              getControlPointsNumber() const;
     size_t              getCurvePointsNumber() const;
@@ -43,7 +46,7 @@ public:
     void                showCurvePoints() const;
 
     //render the curve points after calculation
-    void                renderGL() const;
+    void                renderCurve() const;
 
 
 private:
