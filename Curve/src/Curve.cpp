@@ -157,7 +157,7 @@ void Curve::renderCurve() const
     for( size_t j = 0; j < m_numControlPoints; ++j)
     {
         //set the point size to 4
-        glPointSize( 4.0 );
+        glPointSize( 6.0 );
 
         glBegin( GL_POINTS );
 
@@ -168,6 +168,27 @@ void Curve::renderCurve() const
         glVertex3f( m_controlPoints[j].x, m_controlPoints[j].y, m_controlPoints[j].z );
         glEnd();
     }
+
+
+   //draw control point hall
+    GLfloat lineVertices[m_numControlPoints * 3];
+    size_t m = 0;
+
+    for(size_t l = 0; l< m_numControlPoints * 3 ; l+=3)
+    {
+        lineVertices[l]   = m_controlPoints[m].x;
+        lineVertices[l+1] = m_controlPoints[m].y;
+        lineVertices[l+2] = m_controlPoints[m].z;
+        ++m;
+    }
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0,lineVertices);
+    glDrawArrays(GL_LINE_STRIP, 0 ,m_numControlPoints);
+    glDisableClientState(GL_VERTEX_ARRAY);
+
+
+
 
     for( size_t i = 0;i < m_numCurvePoints; ++i )
     {
@@ -187,6 +208,8 @@ void Curve::renderCurve() const
         //draw the points on the curve
         glVertex3f( m_curvePoints[i].x, m_curvePoints[i].y, m_curvePoints[i].z );
         glEnd();
+
+
     }
 }
 //------------------------------------------------------------------------------------------------------------------

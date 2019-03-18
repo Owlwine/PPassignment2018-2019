@@ -43,20 +43,42 @@ int main()
     SDL_GL_MakeCurrent( window,glcontext );
 //------------------------------------------------------------------------------------------------------------------
 
+
 //set points quantity to 20000 when generating a curve
 //------------------------------------------------------------------------------------------------------------------
-    size_t numCurvePoints = 20000;
+    size_t numCurvePoints = 156610;
 
     //set the control points to generate the curve
     const std::vector<Vec3> controlPoints = { { -10.0f, -10.0f, 0.0f }, { -20.0f, -15.0f, 20.0f },
-                                              { -10.0f, 10.0f, 0.0f }, { 10.0f, -10.0f, 0.0f } };
+                                              { -10.0f, 10.0f, 0.0f }};
 
     //construct a curve
-    Curve c( controlPoints , numCurvePoints );
+   // Curve c( controlPoints , numCurvePoints );
 
     //evaluate the bezier curve point
-    c.evaluateBezierCurve();
+   // c.evaluateBezierCurve();
 //------------------------------------------------------------------------------------------------------------------
+
+
+
+//---------------------------------------------------
+//size_t numCurvePoints = 2000;
+Surface s;
+s.generateSurface(numCurvePoints);
+auto p = s.getCurves();
+
+/*
+for (auto surfaceCurve : s.getCurves())
+{
+    std::cout<<"show curve control points \n ";
+    surfaceCurve.showControlPoints();
+
+}
+*/
+
+
+//--------------------------------------------
+
 
 //------------------------------------------------------------------------------------------------------------------
     glMatrixMode( GL_PROJECTION );
@@ -64,7 +86,7 @@ int main()
     glMatrixMode( GL_MODELVIEW );
 
     //set eye/camera position to (0, 0, 0), look at the original point, and rotate a certain angle
-    gluLookAt( 0, 0, 100, 0, 0, 0, 1, 1, 0 );
+    gluLookAt( 0, 0, 100, 0, 0, 0, 0, 1, 0 );
 
     //set the background colour
     glClearColor( 0.8f, 0.8f, 0.8f, 1.0f );
@@ -75,10 +97,12 @@ int main()
         glClear( GL_COLOR_BUFFER_BIT );
 
         //render the curve
-        c.renderCurve();
-
+        //c.renderCurve();
+        s.renderSurface();
+        //p[2].evaluateBezierCurve();
+        //p[2].renderCurve();
         SDL_GL_SwapWindow( window );
     }
 //------------------------------------------------------------------------------------------------------------------
-}
 
+}
