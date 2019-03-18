@@ -13,14 +13,16 @@ int main()
 {
     std::cout<<"Curve Draw\n";
 
-
+//------------------------------------------------------------------------------------------------------------------
     if( SDL_Init(SDL_INIT_EVERYTHING) < 0 )
     {
         std::cerr<<"cant init SDL\n";
         exit( EXIT_FAILURE) ;
     }
+//------------------------------------------------------------------------------------------------------------------
 
-    //Create a window by 1024*720
+//Create a window by 1024*720
+//------------------------------------------------------------------------------------------------------------------
     SDL_Window *window= SDL_CreateWindow("Curve",
                                          SDL_WINDOWPOS_CENTERED,
                                          SDL_WINDOWPOS_CENTERED,
@@ -39,8 +41,10 @@ int main()
     SDL_GLContext glcontext=SDL_GL_CreateContext( window );
 
     SDL_GL_MakeCurrent( window,glcontext );
+//------------------------------------------------------------------------------------------------------------------
 
-    //set points quantity to 20000 when generating a curve
+//set points quantity to 20000 when generating a curve
+//------------------------------------------------------------------------------------------------------------------
     size_t numCurvePoints = 20000;
 
     //set the control points to generate the curve
@@ -52,8 +56,9 @@ int main()
 
     //evaluate the bezier curve point
     c.evaluateBezierCurve();
+//------------------------------------------------------------------------------------------------------------------
 
-
+//------------------------------------------------------------------------------------------------------------------
     glMatrixMode( GL_PROJECTION );
     gluPerspective( 45.0f, 1024.0f / 720.0f, 0.1f, 100.0f );
     glMatrixMode( GL_MODELVIEW );
@@ -74,5 +79,6 @@ int main()
 
         SDL_GL_SwapWindow( window );
     }
+//------------------------------------------------------------------------------------------------------------------
 }
 

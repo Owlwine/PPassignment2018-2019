@@ -1,4 +1,5 @@
 /// \file Surface.h
+/// \class Surface
 /// \brief generate different types of surfaces with \
 ///        different algrithm (currently only using bezier curve)
 /// \author Ming Yan

@@ -1,10 +1,11 @@
 /// This class was written under the instruction from Jon Macey
 ///
 /// \file Vec3.h
+/// \class Vec3
 /// \brief encapsulates a 3d object
 /// \author Ming Yan
 /// \version 1.0
-/// \date 17/3/19 Updated to NCCA/programming-paradigms-201819-Owlwine
+/// \date 18/3/19 Updated to NCCA/programming-paradigms-201819-Owlwine
 /// Revision History :
 /// Initial Version 11/3/19
 /// \todo tidying up and code optimizations

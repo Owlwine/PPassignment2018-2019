@@ -7,14 +7,17 @@
 
 #include "Surface.h"
 
-
+//------------------------------------------------------------------------------------------------------------------
 int main( int argc, char **argv )
 {
     ::testing::InitGoogleTest( &argc, argv );
     return RUN_ALL_TESTS();
 }
+//------------------------------------------------------------------------------------------------------------------
+
 
 //Test if default constructor works
+//------------------------------------------------------------------------------------------------------------------
 TEST( Vec3, defaultCtor )
 {
     Vec3 a;
@@ -22,8 +25,10 @@ TEST( Vec3, defaultCtor )
     EXPECT_FLOAT_EQ( a.y, 0.0f );
     EXPECT_FLOAT_EQ( a.z, 0.0f );
 }
+//------------------------------------------------------------------------------------------------------------------
 
 //Test if user constructor works
+//------------------------------------------------------------------------------------------------------------------
 TEST( Vec3, userCtor )
 {
     Vec3 b( 0.2f, 1.0f, -5.0f );
@@ -31,8 +36,10 @@ TEST( Vec3, userCtor )
     EXPECT_FLOAT_EQ( b.y, 1.0f );
     EXPECT_FLOAT_EQ( b.z, -5.0f );
 }
+//------------------------------------------------------------------------------------------------------------------
 
 //Test if operator "+=" works
+//------------------------------------------------------------------------------------------------------------------
 TEST( Vec3, plusEqual )
 {
     Vec3 a( 1.0f, 2.0f, 3.0f );
@@ -42,8 +49,10 @@ TEST( Vec3, plusEqual )
     EXPECT_FLOAT_EQ( a.y, 3.0f );
     EXPECT_FLOAT_EQ( a.z, 4.0f );
 }
+//------------------------------------------------------------------------------------------------------------------
 
 //Test if default constructor works
+//------------------------------------------------------------------------------------------------------------------
 TEST( Curve, defaultCtor )
 {
     Curve c;
@@ -63,8 +72,10 @@ TEST( Curve, defaultCtor )
     EXPECT_FLOAT_EQ( cp[3].y, 1.0f );
     EXPECT_FLOAT_EQ( cp[3].z, 0.0f );
 }
+//------------------------------------------------------------------------------------------------------------------
 
 //Test if user constructor works
+//------------------------------------------------------------------------------------------------------------------
 TEST( Curve, userCtor )
 {
     Curve c( { {0.0f,3.0f,4.0f}, {0.0f,1.1f,2.0f} }, 10);
@@ -78,9 +89,10 @@ TEST( Curve, userCtor )
     EXPECT_FLOAT_EQ( cp[1].y, 1.1f );
     EXPECT_FLOAT_EQ( cp[1].z, 2.0f );
 }
-
+//------------------------------------------------------------------------------------------------------------------
 
 //Test if it is able to calculate binomial cofficient
+//------------------------------------------------------------------------------------------------------------------
 TEST( Curve, binomialCoeffs )
 {
     std::vector<size_t> C( 5 );
@@ -92,12 +104,14 @@ TEST( Curve, binomialCoeffs )
     EXPECT_EQ( C[3], 4 );
     EXPECT_EQ( C[4], 1 );
 }
+//------------------------------------------------------------------------------------------------------------------
 
 //Test if it is able to evaluate and generate a bezier cure, either by using default \
 //values, or by using customized values(control points and the quantity of points to \
 //generate the curve). If the bezier curve is generated successfully, the the first \
 //and the last point will go through the first and last control points. It is acceptable \
 //if the results are close enough reasonably.
+//------------------------------------------------------------------------------------------------------------------
 TEST( Curve, evaluateBezierCurve )
 {
     Curve c;
@@ -127,8 +141,10 @@ TEST( Curve, evaluateBezierCurve )
     EXPECT_EQ( abs( cup1[c1.getCurvePointsNumber()-1].y - cop1[c1.getControlPointsNumber()-1].y ) < 0.02f, 1 );
     EXPECT_EQ( abs( cup1[c1.getCurvePointsNumber()-1].z - cop1[c1.getControlPointsNumber()-1].z ) < 0.02f, 1 );
 }
+//------------------------------------------------------------------------------------------------------------------
 
 //Test if default constructor works
+//------------------------------------------------------------------------------------------------------------------
 TEST( Surface, defaultCtor )
 {
     Surface s;
@@ -172,8 +188,10 @@ TEST( Surface, defaultCtor )
     EXPECT_FLOAT_EQ( cp[11].y, 10.0f );
     EXPECT_FLOAT_EQ( cp[11].z, -15.0f );
 }
+//------------------------------------------------------------------------------------------------------------------
 
 //test if generate surface would succeed
+//------------------------------------------------------------------------------------------------------------------
 TEST( Surface, generateSurface )
 {
     Surface s;
@@ -215,3 +233,4 @@ TEST( Surface, generateSurface )
     EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].y, 10.0f );
     EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].z, -15.0f );
 }
+//------------------------------------------------------------------------------------------------------------------
