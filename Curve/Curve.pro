@@ -2,8 +2,7 @@ TEMPLATE  = lib
 
 TARGET  = Curve
 
-SOURCES +=  src/main.cpp \
-            src/Curve.cpp \
+SOURCES +=  src/Curve.cpp \
             src/Surface.cpp
 
 HEADERS +=  include/Vec3.h \

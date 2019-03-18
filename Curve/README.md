@@ -1,2 +1,2 @@
 # PPassignment2018-2019
-Curves 
+This is the main subdirectory contians the library with which others could draw curves through the API.

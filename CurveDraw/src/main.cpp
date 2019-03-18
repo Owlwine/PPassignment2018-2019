@@ -13,12 +13,14 @@ int main()
 {
     std::cout<<"Curve Draw\n";
 
+
     if( SDL_Init(SDL_INIT_EVERYTHING) < 0 )
     {
         std::cerr<<"cant init SDL\n";
         exit( EXIT_FAILURE) ;
     }
 
+    //Create a window by 1024*720
     SDL_Window *window= SDL_CreateWindow("Curve",
                                          SDL_WINDOWPOS_CENTERED,
                                          SDL_WINDOWPOS_CENTERED,
@@ -38,49 +40,38 @@ int main()
 
     SDL_GL_MakeCurrent( window,glcontext );
 
-    bool quit = false;
-    SDL_Event event;
+    //set points quantity to 20000 when generating a curve
+    size_t numCurvePoints = 20000;
 
-    size_t numCurvePoints = 10000;
-    //const std::vector<Vec3> controlPoints = { { -10.0f, -10.0f, 0.0f }, { -20.0f, -15.0f, 20.0f },
-    //                                          { -10.0f, 10.0f, 0.0f }, { 10.0f, -10.0f, 0.0f } };
-    //Curve c( controlPoints , numCurvePoints );
-    //c.evaluateBezierCurve();
+    //set the control points to generate the curve
+    const std::vector<Vec3> controlPoints = { { -10.0f, -10.0f, 0.0f }, { -20.0f, -15.0f, 20.0f },
+                                              { -10.0f, 10.0f, 0.0f }, { 10.0f, -10.0f, 0.0f } };
 
-    Surface s;
-    s.generateSurface(numCurvePoints);
+    //construct a curve
+    Curve c( controlPoints , numCurvePoints );
+
+    //evaluate the bezier curve point
+    c.evaluateBezierCurve();
 
 
     glMatrixMode( GL_PROJECTION );
     gluPerspective( 45.0f, 1024.0f / 720.0f, 0.1f, 100.0f );
     glMatrixMode( GL_MODELVIEW );
-    gluLookAt( 0, 0, 100, 0, 0, 0, 0, 1, 0 );
 
+    //set eye/camera position to (0, 0, 0), look at the original point, and rotate a certain angle
+    gluLookAt( 0, 0, 100, 0, 0, 0, 1, 1, 0 );
+
+    //set the background colour
     glClearColor( 0.8f, 0.8f, 0.8f, 1.0f );
+
+    bool quit = false;
     while( !quit )
-    {
-        while ( SDL_PollEvent( &event ) )
-        {
-            switch ( event.type )
-            {
-            case SDL_QUIT : quit = true; break;
-            /*
-            case SDL_KEYDOWN:
-            {
-                switch(event.key.keysym.sym)
-                {
-                case SDLK_LEFT : Curve.updatePos(-1.0f,0,0);break;
-                case SDLK_RIGHT : Curve.updatePos(1.0f,0,0);break;
-                case SDLK_UP : Curve.updatePos(0.0f,1.0,0);break;
-                case SDLK_DOWN : Curve.updatePos(0.0f,-1.0,0);break;
-                }
-            }
-            */
-            }
-        }
+    {        
         glClear( GL_COLOR_BUFFER_BIT );
-        //c.renderCurve();
-        s.renderSurface();
+
+        //render the curve
+        c.renderCurve();
+
         SDL_GL_SwapWindow( window );
     }
 }

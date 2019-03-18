@@ -27,11 +27,11 @@ struct Vec3
     }
 
 #define FCompare( a,b )\
-    ( ((a)-0.0000001f)<(b) && ((a)+0.0000001f)>(b) )
+    ( ( (a) -0.0000001f ) < ( b ) && ( ( a ) + 0.0000001f ) > ( b ) )
 
     bool operator == ( const Vec3 &_rhs )
     {
-        return ( x==_rhs.x ) && ( y==_rhs.y ) && ( z==_rhs.z );
+        return ( x == _rhs.x ) && ( y == _rhs.y ) && ( z == _rhs.z );
     }
 
     float x = 0.0f;
@@ -39,4 +39,4 @@ struct Vec3
     float z = 0.0f;
 };
 
-#endif  //  Vec3.h
+#endif  //  VEC3_H

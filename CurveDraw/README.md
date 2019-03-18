@@ -1,2 +1,2 @@
 # PPassignment2018-2019
-Curves 
+This subdirectory contains files and functions to draw the curve.

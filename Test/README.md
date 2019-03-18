@@ -1,2 +1,4 @@
 # PPassignment2018-2019
-Curves 
+Tests.
+
+In this subdirectory, files are contained to test if functions in class work properly.

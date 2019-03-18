@@ -16,6 +16,8 @@ Curve::Curve(const std::vector<Vec3> &_controlPoints , const size_t _numCurvePoi
 
     m_numControlPoints = _controlPoints.size();
     m_numCurvePoints = _numCurvePoints;
+
+
     for( size_t i=0; i < m_numControlPoints; ++i )
     {
         m_controlPoints.push_back( _controlPoints[i] );
@@ -131,6 +133,21 @@ void Curve::renderCurve() const
     double_t g = 0.0 ;
     double_t b = 0.0 ;
 
+    for( size_t j = 0; j < m_numControlPoints; ++j)
+    {
+        //set the point size to 4
+        glPointSize( 4.0 );
+
+        glBegin( GL_POINTS );
+
+        //set the colour to red
+        glColor3f( 1.0, 0.0, 0.0 );
+
+        //draw the control points
+        glVertex3f( m_controlPoints[j].x, m_controlPoints[j].y, m_controlPoints[j].z );
+        glEnd();
+    }
+
     for( size_t i = 0;i < m_numCurvePoints; ++i )
     {
         //set the point size to 2
@@ -143,9 +160,8 @@ void Curve::renderCurve() const
         r = abs( fmod( m_curvePoints[i].x , 255.0f ) );
         g = abs( fmod( m_curvePoints[i].y , 255.0f ) );
         b = abs( fmod( m_curvePoints[i].z , 255.0f ) );
-        //std::cout<<r<< ' '<< g <<' '<< b<<'\n';
+
         glColor3f( r, g, b );
-       // std::cout<<r<< ' '<< g <<' '<< b<<'\n';
 
         //draw the points on the curve
         glVertex3f( m_curvePoints[i].x, m_curvePoints[i].y, m_curvePoints[i].z );

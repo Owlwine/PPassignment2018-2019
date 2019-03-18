@@ -23,33 +23,37 @@ std::vector<Vec3> Surface::getSurfaceControlPoints() const
 void Surface::generateSurface(const size_t _numCurvePoints)
 {
     //allocate the control points according to the row and column values
-    size_t r;
-    size_t c;
+    size_t r = 0;
+    size_t c = 0;
+
     size_t i;
 
+    //a temporary Vec3 type vector which will store the control points for a curve
     std::vector<Vec3> controlPoints;
 
-    for ( r = 0; r < m_row ; ++r)
+    //generate curves in column
+    for ( c = 0; c < m_column ; ++c )
     {
-        for ( c = 0; c < m_column ; ++c)
+        for ( r = 0; r < m_row ; ++r )
         {
-            controlPoints.push_back( Vec3(m_surfaceControlPoints[r * m_column + c].x, m_surfaceControlPoints[r * m_column + c].y, m_surfaceControlPoints[r * m_column + c].z) );
-        }
+            controlPoints.push_back( Vec3(m_surfaceControlPoints[ r * m_column + c ].x, m_surfaceControlPoints[ r * m_column + c ].y, m_surfaceControlPoints[ r * m_column + c ].z) );
+        }       
 
         m_curves.push_back( Curve( controlPoints, _numCurvePoints) );
 
-        for ( i = m_column; i > 0 ; --i )
+        //empty the temporary vector, in order to store control points for next curve
+        for ( i = m_row; i > 0 ; --i )
         {
             controlPoints.pop_back();
         }
     }
 
-
-    for ( c = 0; c < m_column ; ++c)
+    //generate curves in row
+    for ( r = 0; r < m_row ; ++r )
     {
-        for ( r = 0; r < m_row ; ++r)
+        for ( c = 0; c < m_column ; ++c )
         {
-            controlPoints.push_back( Vec3(m_surfaceControlPoints[c * m_row + r].x, m_surfaceControlPoints[c * m_row + r].y, m_surfaceControlPoints[c * m_row + r].z) );
+            controlPoints.push_back( Vec3(m_surfaceControlPoints[ r * m_column + c ].x, m_surfaceControlPoints[ r * m_column + c ].y, m_surfaceControlPoints[ r * m_column + c ].z) );
         }
 
         m_curves.push_back( Curve( controlPoints, _numCurvePoints) );
@@ -61,10 +65,18 @@ void Surface::generateSurface(const size_t _numCurvePoints)
     }
 }
 
+std::vector<Curve> Surface::getCurves() const
+{
+    return m_curves;
+}
+
+//render the surface consists of bezier curves
 void Surface::renderSurface() const
 {
-    for( auto &p : m_curves)
+    auto p = getCurves();
+    for( size_t i = 0; i< m_curves.size(); ++i)
     {
-        p.renderCurve();
+        p[i].evaluateBezierCurve();
+        p[i].renderCurve();
     }
 }
