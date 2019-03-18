@@ -46,7 +46,7 @@ int main()
 
 //set points quantity to 20000 when generating a curve
 //------------------------------------------------------------------------------------------------------------------
-    size_t numCurvePoints = 156610;
+    size_t numCurvePoints = 100;
 
     //set the control points to generate the curve
     const std::vector<Vec3> controlPoints = { { -10.0f, -10.0f, 0.0f }, { -20.0f, -15.0f, 20.0f },
@@ -64,8 +64,8 @@ int main()
 //---------------------------------------------------
 //size_t numCurvePoints = 2000;
 Surface s;
-s.generateSurface(numCurvePoints);
-auto p = s.getCurves();
+
+s.evaluateSurfacePoints(numCurvePoints);
 
 /*
 for (auto surfaceCurve : s.getCurves())
@@ -86,7 +86,7 @@ for (auto surfaceCurve : s.getCurves())
     glMatrixMode( GL_MODELVIEW );
 
     //set eye/camera position to (0, 0, 0), look at the original point, and rotate a certain angle
-    gluLookAt( 0, 0, 100, 0, 0, 0, 0, 1, 0 );
+    gluLookAt( 0, 0, 100, 0, 0, 0, 1, 1, 0 );
 
     //set the background colour
     glClearColor( 0.8f, 0.8f, 0.8f, 1.0f );

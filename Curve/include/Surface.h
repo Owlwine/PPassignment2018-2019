@@ -23,13 +23,23 @@ public:
     Surface( const Surface & ) = default;
     Surface( Surface && ) = default;
 
+    //need set function
     size_t              getSurfaceRow() const;
-    size_t              getSurfaceColumn() const;
+    size_t              getSurfaceColumn() const;    
     std::vector<Vec3>   getSurfaceControlPoints() const;
+    size_t              getSurfacePointsNumber() const;
+
+     //not really using
+    void                setSurfacePointsNumber( const size_t _numCurvePoints );
+
+    //currently not used
+    std::vector<Vec3>   getSurfacePoints() const;
 
     //need to passing the amount of points on generated curve, while generating the surface
-    void                generateSurface( const size_t _numCurvePoints);
+    //might abandon
+    void                storeSurfaceControlPoints( const size_t _numCurvePoints);
 
+    void                evaluateSurfacePoints(const size_t _numCurvePoints );
     std::vector<Curve>  getCurves() const;
     void                renderSurface() const;
 
@@ -38,6 +48,9 @@ public:
 private:
     size_t              m_row = 4;
     size_t              m_column = 3;
+
+    //not really using
+    size_t              m_surfacePointsNumber = 10000;
     std::vector<Vec3>   m_surfaceControlPoints = { { -10.0f, -10.0f,13.0f }, { -5.0f, -9.0f, 10.0f }, { -12.0f,-11.0f, 5.0f },
                                                  { -7.0f, 7.0f, 14.0f }, { -8.0f, 10.0f, 9.0f }, { -10.0f, 13.0f, 4.0f },
                                                  { 7.0f, 10.0f, 15.0f }, { 5.0f, 10.0f, 8.0f }, { 10.0f, 10.0f, 3.0f },
@@ -45,6 +58,8 @@ private:
 
     //Store the curves for generate the surface
     std::vector<Curve>  m_curves;
+
+    std::vector<Vec3>   m_surfacePoints;
 };
 
 

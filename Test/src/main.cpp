@@ -192,45 +192,45 @@ TEST( Surface, defaultCtor )
 
 //test if generate surface would succeed
 //------------------------------------------------------------------------------------------------------------------
-TEST( Surface, generateSurface )
-{
-    Surface s;
-    s.generateSurface( 1500 );
-    auto p = s.getCurves();
+//TEST( Surface, generateSurface )
+//{
+//    Surface s;
+//    s.generateSurface( 1500 );
+//    auto p = s.getCurves();
 
-    size_t maxCurveNumber = s.getSurfaceColumn() + s.getSurfaceRow();
-    //check if curve points amount has been updated
-    for( size_t i = 0; i < ( maxCurveNumber ); ++i )
-    {
-        EXPECT_EQ( p[i].getCurvePointsNumber() , 1500);
-    }
+//    size_t maxCurveNumber = s.getSurfaceColumn() + s.getSurfaceRow();
+//    //check if curve points amount has been updated
+//    for( size_t i = 0; i < ( maxCurveNumber ); ++i )
+//    {
+//        EXPECT_EQ( p[i].getCurvePointsNumber() , 1500);
+//    }
 
-    for(size_t k=0.0;k<4;++k)
-        std::cout<<p[0].getControlPoints()[k].x<<' '<<p[0].getControlPoints()[k].y<<' '<<p[0].getControlPoints()[k].z<<'\n';
+//    for(size_t k=0.0;k<4;++k)
+//        std::cout<<p[0].getControlPoints()[k].x<<' '<<p[0].getControlPoints()[k].y<<' '<<p[0].getControlPoints()[k].z<<'\n';
 
-    //check the first curve and the last curve, \
-    //see if their control points are same as expected
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[0].x, -10.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[0].y, -10.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[0].z, 0.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[1].x, -7.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[1].y, 7.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[1].z, 0.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[2].x, 7.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[2].y, 10.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[2].z, 0.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[3].x, 15.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[3].y, -5.0f );
-    EXPECT_FLOAT_EQ( p[0].getControlPoints()[3].z, 0.0f );
+//    //check the first curve and the last curve, \
+//    //see if their control points are same as expected
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[0].x, -10.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[0].y, -10.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[0].z, 0.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[1].x, -7.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[1].y, 7.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[1].z, 0.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[2].x, 7.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[2].y, 10.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[2].z, 0.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[3].x, 15.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[3].y, -5.0f );
+//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[3].z, 0.0f );
 
-    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[0].x, 15.0f );
-    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[0].y, -5.0f );
-    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[0].z, 0.0f );
-    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[1].x, 0.0f );
-    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[1].y, -20.0f );
-    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[1].z, -12.0f );
-    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].x, 10.0f );
-    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].y, 10.0f );
-    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].z, -15.0f );
-}
+//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[0].x, 15.0f );
+//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[0].y, -5.0f );
+//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[0].z, 0.0f );
+//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[1].x, 0.0f );
+//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[1].y, -20.0f );
+//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[1].z, -12.0f );
+//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].x, 10.0f );
+//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].y, 10.0f );
+//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].z, -15.0f );
+//}
 //------------------------------------------------------------------------------------------------------------------

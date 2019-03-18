@@ -97,7 +97,7 @@ void Curve::evaluateBezierCurve( )
     float bezierBlendingFunction;
 
     std::vector<size_t> C( m_numControlPoints );
-    std::vector<Vec3> CurvePoints( m_numCurvePoints );
+    std::vector<Vec3> curvePoints( m_numCurvePoints );
 
 
     /// The following section is modified from :-
@@ -114,9 +114,9 @@ void Curve::evaluateBezierCurve( )
 
             //When evaluating points on a bezier curve, a curve point is equal to \
             //a control point multiply the bezier blending function
-            CurvePoints[i].x += m_controlPoints[k].x * bezierBlendingFunction;
-            CurvePoints[i].y += m_controlPoints[k].y * bezierBlendingFunction;
-            CurvePoints[i].z += m_controlPoints[k].z * bezierBlendingFunction;
+            curvePoints[i].x += m_controlPoints[k].x * bezierBlendingFunction;
+            curvePoints[i].y += m_controlPoints[k].y * bezierBlendingFunction;
+            curvePoints[i].z += m_controlPoints[k].z * bezierBlendingFunction;
         }
     }
     /// end of Citation
@@ -124,7 +124,7 @@ void Curve::evaluateBezierCurve( )
     //Store the calculated points into the member of the curve type object
     for( size_t i = 0;i < m_numCurvePoints; ++i )
     {
-        m_curvePoints.push_back( CurvePoints[i] );
+        m_curvePoints.push_back( curvePoints[i] );
     }
 }
 //------------------------------------------------------------------------------------------------------------------
@@ -208,8 +208,6 @@ void Curve::renderCurve() const
         //draw the points on the curve
         glVertex3f( m_curvePoints[i].x, m_curvePoints[i].y, m_curvePoints[i].z );
         glEnd();
-
-
     }
 }
 //------------------------------------------------------------------------------------------------------------------
