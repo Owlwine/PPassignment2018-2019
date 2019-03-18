@@ -153,84 +153,99 @@ TEST( Surface, defaultCtor )
     auto cp = s.getSurfaceControlPoints();
     EXPECT_FLOAT_EQ( cp[0].x, -10.0f );
     EXPECT_FLOAT_EQ( cp[0].y, -10.0f );
-    EXPECT_FLOAT_EQ( cp[0].z, 0.0f );
-    EXPECT_FLOAT_EQ( cp[1].x, 0.0f );
-    EXPECT_FLOAT_EQ( cp[1].y, 20.0f );
-    EXPECT_FLOAT_EQ( cp[1].z, 6.0f );
-    EXPECT_FLOAT_EQ( cp[2].x, 10.0f );
-    EXPECT_FLOAT_EQ( cp[2].y, 10.0f );
-    EXPECT_FLOAT_EQ( cp[2].z, 0.0f );
+    EXPECT_FLOAT_EQ( cp[0].z, 13.0f );
+    EXPECT_FLOAT_EQ( cp[1].x, -5.0f );
+    EXPECT_FLOAT_EQ( cp[1].y, -9.0f );
+    EXPECT_FLOAT_EQ( cp[1].z, 10.0f );
+    EXPECT_FLOAT_EQ( cp[2].x, -12.0f );
+    EXPECT_FLOAT_EQ( cp[2].y, -11.0f );
+    EXPECT_FLOAT_EQ( cp[2].z, 5.0f );
     EXPECT_FLOAT_EQ( cp[3].x, -7.0f );
     EXPECT_FLOAT_EQ( cp[3].y, 7.0f );
-    EXPECT_FLOAT_EQ( cp[3].z, 0.0f );
-    EXPECT_FLOAT_EQ( cp[4].x, 0.0f );
+    EXPECT_FLOAT_EQ( cp[3].z, 14.0f );
+    EXPECT_FLOAT_EQ( cp[4].x, -8.0f );
     EXPECT_FLOAT_EQ( cp[4].y, 10.0f );
-    EXPECT_FLOAT_EQ( cp[4].z, 0.0f );
-    EXPECT_FLOAT_EQ( cp[5].x, 10.0f );
-    EXPECT_FLOAT_EQ( cp[5].y, 10.0f );
-    EXPECT_FLOAT_EQ( cp[5].z, -5.0f );
+    EXPECT_FLOAT_EQ( cp[4].z, 9.0f );
+    EXPECT_FLOAT_EQ( cp[5].x, -10.0f );
+    EXPECT_FLOAT_EQ( cp[5].y, 13.0f );
+    EXPECT_FLOAT_EQ( cp[5].z, 4.0f );
     EXPECT_FLOAT_EQ( cp[6].x, 7.0f );
     EXPECT_FLOAT_EQ( cp[6].y, 10.0f );
-    EXPECT_FLOAT_EQ( cp[6].z, 0.0f );
-    EXPECT_FLOAT_EQ( cp[7].x, 0.0f );
-    EXPECT_FLOAT_EQ( cp[7].y, -10.0f );
-    EXPECT_FLOAT_EQ( cp[7].z, -6.0f );
+    EXPECT_FLOAT_EQ( cp[6].z, 15.0f );
+    EXPECT_FLOAT_EQ( cp[7].x, 5.0f );
+    EXPECT_FLOAT_EQ( cp[7].y, 10.0f );
+    EXPECT_FLOAT_EQ( cp[7].z, 8.0f );
     EXPECT_FLOAT_EQ( cp[8].x, 10.0f );
     EXPECT_FLOAT_EQ( cp[8].y, 10.0f );
-    EXPECT_FLOAT_EQ( cp[8].z, -10.0f );
+    EXPECT_FLOAT_EQ( cp[8].z, 3.0f );
     EXPECT_FLOAT_EQ( cp[9].x, 15.0f );
     EXPECT_FLOAT_EQ( cp[9].y, -5.0f );
-    EXPECT_FLOAT_EQ( cp[9].z, 0.0f );
-    EXPECT_FLOAT_EQ( cp[10].x, 0.0f );
-    EXPECT_FLOAT_EQ( cp[10].y, -20.0f );
-    EXPECT_FLOAT_EQ( cp[10].z, -12.0f );
+    EXPECT_FLOAT_EQ( cp[9].z, 16.0f );
+    EXPECT_FLOAT_EQ( cp[10].x, 7.0f );
+    EXPECT_FLOAT_EQ( cp[10].y, -7.0f );
+    EXPECT_FLOAT_EQ( cp[10].z, 7.0f );
     EXPECT_FLOAT_EQ( cp[11].x, 10.0f );
-    EXPECT_FLOAT_EQ( cp[11].y, 10.0f );
-    EXPECT_FLOAT_EQ( cp[11].z, -15.0f );
+    EXPECT_FLOAT_EQ( cp[11].y, -10.0f );
+    EXPECT_FLOAT_EQ( cp[11].z, 2.0f );
 }
 //------------------------------------------------------------------------------------------------------------------
 
-//test if generate surface would succeed
+
+//test if user constructor works
 //------------------------------------------------------------------------------------------------------------------
-//TEST( Surface, generateSurface )
-//{
-//    Surface s;
-//    s.generateSurface( 1500 );
-//    auto p = s.getCurves();
-
-//    size_t maxCurveNumber = s.getSurfaceColumn() + s.getSurfaceRow();
-//    //check if curve points amount has been updated
-//    for( size_t i = 0; i < ( maxCurveNumber ); ++i )
-//    {
-//        EXPECT_EQ( p[i].getCurvePointsNumber() , 1500);
-//    }
-
-//    for(size_t k=0.0;k<4;++k)
-//        std::cout<<p[0].getControlPoints()[k].x<<' '<<p[0].getControlPoints()[k].y<<' '<<p[0].getControlPoints()[k].z<<'\n';
-
-//    //check the first curve and the last curve, \
-//    //see if their control points are same as expected
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[0].x, -10.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[0].y, -10.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[0].z, 0.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[1].x, -7.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[1].y, 7.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[1].z, 0.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[2].x, 7.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[2].y, 10.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[2].z, 0.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[3].x, 15.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[3].y, -5.0f );
-//    EXPECT_FLOAT_EQ( p[0].getControlPoints()[3].z, 0.0f );
-
-//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[0].x, 15.0f );
-//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[0].y, -5.0f );
-//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[0].z, 0.0f );
-//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[1].x, 0.0f );
-//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[1].y, -20.0f );
-//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[1].z, -12.0f );
-//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].x, 10.0f );
-//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].y, 10.0f );
-//    EXPECT_FLOAT_EQ( p[ maxCurveNumber - 1 ].getControlPoints()[2].z, -15.0f );
-//}
+TEST( Surface, userCtor )
+{
+    Surface s( 3, 3, 40,
+    { { -7.0f, 7.0f, 14.0f }, { -8.0f, 10.0f, 9.0f }, { -10.0f, 13.0f, 4.0f },
+      { 7.0f, 10.0f, 15.0f }, { 5.0f, 10.0f, 8.0f }, { 10.0f, 10.0f, 3.0f },
+      { 15.0f, -5.0f, 16.0f }, { 7.0f, -7.0f, 7.0f }, { 10.0f, -10.0f, 2.0f } });
+    EXPECT_EQ( s.getSurfaceRow(), 3 );
+    EXPECT_EQ( s.getSurfaceColumn(), 3 );
+    EXPECT_EQ( s.getEdgePointsNumber(), 40 );
+    EXPECT_EQ( s.getSurfacePointsNumber(), 1600 );
+    auto cp = s.getSurfaceControlPoints();
+    EXPECT_FLOAT_EQ( cp[0].x, -7.0f );
+    EXPECT_FLOAT_EQ( cp[0].y, 7.0f );
+    EXPECT_FLOAT_EQ( cp[0].z, 14.0f );
+    EXPECT_FLOAT_EQ( cp[1].x, -8.0f );
+    EXPECT_FLOAT_EQ( cp[1].y, 10.0f );
+    EXPECT_FLOAT_EQ( cp[1].z, 9.0f );
+    EXPECT_FLOAT_EQ( cp[2].x, -10.0f );
+    EXPECT_FLOAT_EQ( cp[2].y, 13.0f );
+    EXPECT_FLOAT_EQ( cp[2].z, 4.0f );
+    EXPECT_FLOAT_EQ( cp[3].x, 7.0f );
+    EXPECT_FLOAT_EQ( cp[3].y, 10.0f );
+    EXPECT_FLOAT_EQ( cp[3].z, 15.0f );
+    EXPECT_FLOAT_EQ( cp[4].x, 5.0f );
+    EXPECT_FLOAT_EQ( cp[4].y, 10.0f );
+    EXPECT_FLOAT_EQ( cp[4].z, 8.0f );
+    EXPECT_FLOAT_EQ( cp[5].x, 10.0f );
+    EXPECT_FLOAT_EQ( cp[5].y, 10.0f );
+    EXPECT_FLOAT_EQ( cp[5].z, 3.0f );
+    EXPECT_FLOAT_EQ( cp[6].x, 15.0f );
+    EXPECT_FLOAT_EQ( cp[6].y, -5.0f );
+    EXPECT_FLOAT_EQ( cp[6].z, 16.0f );
+    EXPECT_FLOAT_EQ( cp[7].x, 7.0f );
+    EXPECT_FLOAT_EQ( cp[7].y, -7.0f );
+    EXPECT_FLOAT_EQ( cp[7].z, 7.0f );
+    EXPECT_FLOAT_EQ( cp[8].x, 10.0f );
+    EXPECT_FLOAT_EQ( cp[8].y, -10.0f );
+    EXPECT_FLOAT_EQ( cp[8].z, 2.0f );
+}
 //------------------------------------------------------------------------------------------------------------------
+
+
+//test if program is able to evaluate points on the surface
+//------------------------------------------------------------------------------------------------------------------
+TEST( Surface, evaluateSurfacePoints )
+{
+    Surface s( 2, 2, 100, { { -10.0f, 13.0f, 4.0f },{ 10.0f, 10.0f, 3.0f },
+             { 7.0f, 10.0f, 15.0f }, { 5.0f, 10.0f, 8.0f } });
+    s.evaluateSurfacePoints();
+    auto p = s.getSurfacePoints();
+    std::cout<<p[999].x<<' '<<p[1000].y<<' '<<p[999].z<<' ' <<' \n ';
+    std::cout<<' '<<p.size()<<' '<<'\n';
+    EXPECT_EQ( abs( p[0].x - ( -10.0f ) ) < 0.02f, 1 );
+    EXPECT_EQ( abs( p[0].y - 13.0f ) < 0.02f, 1 );
+    EXPECT_EQ( abs( p[0].z - 4.0f ) < 0.02f, 1 );
+}

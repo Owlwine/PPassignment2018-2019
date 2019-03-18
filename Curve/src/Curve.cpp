@@ -26,12 +26,14 @@ Curve::Curve(const std::vector<Vec3> &_controlPoints , const size_t _numCurvePoi
 }
 //------------------------------------------------------------------------------------------------------------------
 
+
 //------------------------------------------------------------------------------------------------------------------
 size_t Curve::getControlPointsNumber() const
 {
     return m_numControlPoints;
 }
 //------------------------------------------------------------------------------------------------------------------
+
 
 //------------------------------------------------------------------------------------------------------------------
 size_t Curve::getCurvePointsNumber() const
@@ -40,12 +42,14 @@ size_t Curve::getCurvePointsNumber() const
 }
 //------------------------------------------------------------------------------------------------------------------
 
+
 //------------------------------------------------------------------------------------------------------------------
 std::vector<Vec3> Curve::getControlPoints() const
 {
     return m_controlPoints;
 }
 //------------------------------------------------------------------------------------------------------------------
+
 
 //------------------------------------------------------------------------------------------------------------------
 void Curve::showControlPoints() const
@@ -56,6 +60,7 @@ void Curve::showControlPoints() const
     }
 }
 //------------------------------------------------------------------------------------------------------------------
+
 
 //------------------------------------------------------------------------------------------------------------------
 /// The following function is modified from :-
@@ -137,6 +142,7 @@ std::vector<Vec3> Curve::getCurvePoints() const
 }
 //------------------------------------------------------------------------------------------------------------------
 
+
 //------------------------------------------------------------------------------------------------------------------
 void Curve::showCurvePoints()const
 {
@@ -147,16 +153,14 @@ void Curve::showCurvePoints()const
 }
 //------------------------------------------------------------------------------------------------------------------
 
+
 //------------------------------------------------------------------------------------------------------------------
 void Curve::renderCurve() const
 {
-    double_t r = 0.0 ;
-    double_t g = 0.0 ;
-    double_t b = 0.0 ;
-
+    //draw the control points
     for( size_t j = 0; j < m_numControlPoints; ++j)
     {
-        //set the point size to 4
+        //set the point size to 6
         glPointSize( 6.0 );
 
         glBegin( GL_POINTS );
@@ -170,25 +174,29 @@ void Curve::renderCurve() const
     }
 
 
-   //draw control point hall
-    GLfloat lineVertices[m_numControlPoints * 3];
+    //draw control point hall
+    GLfloat vertices[m_numControlPoints * 3];
+
     size_t m = 0;
 
-    for(size_t l = 0; l< m_numControlPoints * 3 ; l+=3)
+    for(size_t l = 0; l < m_numControlPoints * 3 ; l += 3 )
     {
-        lineVertices[l]   = m_controlPoints[m].x;
-        lineVertices[l+1] = m_controlPoints[m].y;
-        lineVertices[l+2] = m_controlPoints[m].z;
+        vertices[l]   = m_controlPoints[m].x;
+        vertices[l+1] = m_controlPoints[m].y;
+        vertices[l+2] = m_controlPoints[m].z;
         ++m;
     }
 
     glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0,lineVertices);
+    glVertexPointer(3, GL_FLOAT, 0,vertices);
     glDrawArrays(GL_LINE_STRIP, 0 ,m_numControlPoints);
     glDisableClientState(GL_VERTEX_ARRAY);
 
 
-
+    //draw the generated points on the curve
+    double_t r = 0.0 ;
+    double_t g = 0.0 ;
+    double_t b = 0.0 ;
 
     for( size_t i = 0;i < m_numCurvePoints; ++i )
     {
@@ -197,7 +205,7 @@ void Curve::renderCurve() const
 
         glBegin( GL_POINTS );
 
-        //set the points colours according to the position, using mod() function and getting \
+        //set the points colours according to the position, using fmod() function and getting \
         //the absolute values
         r = abs( fmod( m_curvePoints[i].x , 255.0f ) );
         g = abs( fmod( m_curvePoints[i].y , 255.0f ) );
@@ -205,7 +213,7 @@ void Curve::renderCurve() const
 
         glColor3f( r, g, b );
 
-        //draw the points on the curve
+        //draw the points
         glVertex3f( m_curvePoints[i].x, m_curvePoints[i].y, m_curvePoints[i].z );
         glEnd();
     }
