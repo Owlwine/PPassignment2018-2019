@@ -25,7 +25,6 @@ public:
     Surface(const size_t _nRow, const size_t _nColumn,
              const size_t _numCurvePoints, const std::vector<Vec3> &_controlPoints);
 
-    //need set function
     size_t              getSurfaceRow() const;
     size_t              getSurfaceColumn() const;
     size_t              getEdgePointsNumber() const;

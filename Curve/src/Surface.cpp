@@ -4,7 +4,8 @@
 
 #include "Surface.h"
 
-//user constructor
+//user constructor, please notice that if either row or column queals to 1, it is supposed to be regards as a cure\
+//rather than a surface. So please using curve function in that case.
 //------------------------------------------------------------------------------------------------------------------
 Surface::Surface( const size_t _nRow, const size_t _nColumn, const size_t _numCurvePoints,
                   const std::vector<Vec3> &_controlPoints ):

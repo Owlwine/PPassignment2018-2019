@@ -46,28 +46,40 @@ private members (with default values):
     std::vector<Vec3>   m_curvePoints;
 
 
+class Surface's constructor and public functions:
+    Surface(const size_t _nRow, const size_t _nColumn,
+             const size_t _numCurvePoints, const std::vector<Vec3> &_controlPoints);
 
-class Surface's public functions:
     size_t              getSurfaceRow() const;
     size_t              getSurfaceColumn() const;
+    size_t              getEdgePointsNumber() const;
+    size_t              getSurfacePointsNumber() const;
     std::vector<Vec3>   getSurfaceControlPoints() const;
+    std::vector<Vec3>   getSurfacePoints() const;
 
-    //need to passing the amount of points on generated curve, while generating the surface
-    void                generateSurface( const size_t _numCurvePoints);
+    //evaluate the points on the surface, according to the control points
+    void                evaluateSurfacePoints();
 
-    std::vector<Curve>  getCurves() const;
     void                renderSurface() const;
 
-private members (with default values):
+
+private members;
     size_t              m_row = 4;
     size_t              m_column = 3;
-    std::vector<Vec3>   m_surfaceControlPoints = { { -10.0f, -10.0f,0.0f }, { 0.0f, 20.0f, 6.0f }, { 10.0f,10.0f, 0.0f },
-                                                 { -7.0f, 7.0f, 0.0f }, { 0.0f, 10.0f, 0.0f }, { 10.0f, 10.0f, -5.0f },
-                                                 { 7.0f, 10.0f, 0.0f }, { 0.0f, -10.0f, -6.0f }, { 10.0f, 10.0f, -10.0f },
-                                                 { 15.0f, -5.0f, 0.0f }, { 0.0f, -20.0f, -12.0f }, { 10.0f, 10.0f, -15.0f } };
+    size_t              m_edgePointsNumber = 100;
+    size_t              m_surfacePointsNumber = 100 * 100;
+    std::vector<Vec3>   m_surfaceControlPoints = { { -10.0f, -10.0f,13.0f }, { -5.0f, -9.0f, 10.0f }, { -12.0f,-11.0f, 5.0f },
+                                                 { -7.0f, 7.0f, 14.0f }, { -8.0f, 10.0f, 9.0f }, { -10.0f, 13.0f, 4.0f },
+                                                 { 7.0f, 10.0f, 15.0f }, { 5.0f, 10.0f, 8.0f }, { 10.0f, 10.0f, 3.0f },
+                                                 { 15.0f, -5.0f, 16.0f }, { 7.0f, -7.0f, 7.0f }, { 10.0f, -10.0f, 2.0f } };
 
-    //Store the curves for generate the surface
+    //Store the curves to use functions,like showing control point hall
     std::vector<Curve>  m_curves;
+
+    std::vector<Vec3>   m_surfacePoints;
+};
+
+
 
 To generate a curve(currently bezier curve avaliable), you could input a vector of control points.Though the control points amount is not limited, please be aware that it will be expensive if the quantity of control poits reachs too large. Simply follow these steps:
 -const std::vector<Vec3> controlPoints = { { -10.0f, -10.0f, 0.0f }, { more_control_points },... };
