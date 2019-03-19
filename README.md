@@ -7,6 +7,7 @@ Before operating this program:
 
 System information:
 Linux(64) Centos Redhat
+Qt Creator based on Qt 5.11.1 
 
 
 
